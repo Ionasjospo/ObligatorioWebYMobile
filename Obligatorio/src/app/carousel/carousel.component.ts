@@ -8,7 +8,7 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CarouselComponent implements OnInit {
 
-  images = [700, 533, 807, 124].map((n) => `https://picsum.photos/id/${n}/900/500`);
+  images = ["../assets/molinos2.jpg","../assets/molinos2.jpg","../assets/molinos2.jpg"];
 
   constructor(config: NgbCarouselConfig) {
     // customize default values of carousels used by this component tree
