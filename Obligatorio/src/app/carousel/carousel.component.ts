@@ -8,11 +8,11 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 })
 export class CarouselComponent implements OnInit {
 
-  images = ["../assets/molinos2.jpg","../assets/molinos2.jpg","../assets/molinos2.jpg"];
+  images = ["../assets/molinos1.jpg","../assets/molinos2.jpg","../assets/molinos3.jpg"];
 
   constructor(config: NgbCarouselConfig) {
     // customize default values of carousels used by this component tree
-    config.interval = 10000;
+    config.interval = 1000;
     config.wrap = false;
     config.keyboard = false;
     config.pauseOnHover = false;
