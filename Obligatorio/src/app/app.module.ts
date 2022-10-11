@@ -10,15 +10,22 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './carousel/carousel.component';
 
 import { LoginComponent } from './login/login.component';
+import { CatalogueComponent } from './catalogue/catalogue.component';
+import { ItemStyleComponent } from './item-style/item-style.component';
+import { getTypePipe } from './getTypePipe';
+import { getResistencePipe } from "./getResistancePipe";
 
 @NgModule({
   declarations: [
     AppComponent,
-
     HeaderComponent,
     FooterComponent,
     CarouselComponent,
-    LoginComponent
+    LoginComponent,
+    getTypePipe,
+    getResistencePipe,
+    CatalogueComponent,
+    ItemStyleComponent
   ],
   imports: [
     BrowserModule,
