@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Item } from '../Item';
-import { getTypePipe } from '../getTypePipe';
-import { getResistencePipe } from '../getResistancePipe';
+import { Item } from 'src/app/Interfaces/Item';
+import { getTypePipe } from 'src/app/getTypePipe';
+import { getResistencePipe } from 'src/app/getResistancePipe';
+
+
 
 
 @Component({
