@@ -7,7 +7,7 @@ import { User } from "../User";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  logged : boolean = false;
   userList: User[] = [ {username: "ionas", password: "1234"}];
   user?: User;
   /**
@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
     {
       if (this.user?.password == password) {
         alert("Welcome back, " + username);
+        this.logged = true;
       }
     }
   }
