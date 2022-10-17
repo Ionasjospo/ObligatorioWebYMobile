@@ -1,0 +1,14 @@
+<div *ngIf="item">
+    <div class="card">
+        <img class="card-img" src={{item.img}} alt="Card image cap">
+        <div class="card-body">
+          <h3 class="titleItem">{{item.title}}</h3>
+          <p class="descriptionItem">
+              Type: {{item.type| getType}}.<br>
+              Height: {{item.height}}.<br>
+              Resistance: {{item.resistance| getResistance}}.<br>
+              Material: {{item.material}}.<br>
+          </p>
+        </div>
+      </div>
+</div>
