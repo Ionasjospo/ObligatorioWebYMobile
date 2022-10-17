@@ -10,7 +10,7 @@
         <div class="col-12 col-md-2">
 
           <div ngbDropdown class="d-inline-block">
-            <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Filters</button>
+            <button type="button" class="btn btn-outline-primary filterByType" id="dropdownBasic1" ngbDropdownToggle>Filter by type</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem (click)="filter(0)">Blades</button>
               <button ngbDropdownItem (click)="filter(1)">Body</button>
@@ -18,6 +18,9 @@
               <button ngbDropdownItem (click)="filter(3)">All</button>
             </div>
           </div>
+          
+          
+
 
         </div>
         <div class="col-12 col-md-10">

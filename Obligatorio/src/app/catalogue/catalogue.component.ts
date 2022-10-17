@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Item, Type, Resistance } from "../item";
+import { Item, Type, Resistance } from "../Item";
 import { getTypePipe } from '../getTypePipe';
 
 
