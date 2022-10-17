@@ -8,12 +8,14 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CarouselComponent } from './carousel/carousel.component';
-
 import { LoginComponent } from './login/login.component';
 import { CatalogueComponent } from './catalogue/catalogue.component';
 import { ItemStyleComponent } from './item-style/item-style.component';
 import { getTypePipe } from './getTypePipe';
 import { getResistencePipe } from "./getResistancePipe";
+import { ValidationTableComponent } from './validation-table/validation-table.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -26,11 +28,14 @@ import { getResistencePipe } from "./getResistancePipe";
     getResistencePipe,
     CatalogueComponent,
     ItemStyleComponent
+    ValidationTableComponent
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
