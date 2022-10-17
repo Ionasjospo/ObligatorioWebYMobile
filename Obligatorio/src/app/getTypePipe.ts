@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Item, Type } from './item';
+import { Item, Type } from './Item';
 
 @Pipe({name: 'getType'})
 export class getTypePipe implements PipeTransform {
