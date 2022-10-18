@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from "../User";
+import { User } from 'src/app/Interfaces/User';
+import { UserListService } from 'src/app/Services/user-list.service';
 
 @Component({
   selector: 'app-login',
@@ -8,14 +9,30 @@ import { User } from "../User";
 })
 export class LoginComponent implements OnInit {
   logged : boolean = false;
+<<<<<<< HEAD:Obligatorio/src/app/login/login.component.ts
   userList: User[] = [ {username: "ionas", password: "ionas"}, {username: "lucas", password: "lucas"}];
+=======
+  
+  constructor(private UserListService: UserListService) { }
+  
+  ngOnInit(): void {
+    this.getUsers();
+  }
+  users: User[] = []
+
+  getUsers(): void{
+    this.users = this.UserListService.getUsers();
+   }
+
+  // userList: User[] = [ {username: "ionas", password: "1234"}];
+>>>>>>> 2e49fe5bbad7d920a47e6efd8df9b990175ec649:Obligatorio/src/app/Components/login/login.component.ts
   user?: User;
   /**
    * login
    */
   public login(username:string, password:string) {
     let finded = false;
-    this.userList.forEach(element => {
+    this.users.forEach(element => {
       if(element.username == username){
         finded = true;
         this.user = element;
@@ -38,7 +55,7 @@ export class LoginComponent implements OnInit {
    */
   public validationUser(newUsername: string, newPassword: string) {
     let validUser = false;
-    this.userList.forEach(element => {
+    this.users.forEach(element => {
       if (element.username == newUsername) {
         validUser = true;
       }
@@ -60,12 +77,8 @@ export class LoginComponent implements OnInit {
      * newUser
      */
     private newUser(newUser : User) {
-      this.userList.push(newUser);
+      this.users.push(newUser);
     }
 
-    constructor() { }
-
-    ngOnInit(): void {
-    }
 
   }

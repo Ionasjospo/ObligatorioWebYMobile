@@ -1,19 +1,19 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
-import { HeaderComponent } from './header/header.component';
-import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './Components/header/header.component';
+import { FooterComponent } from './Components/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { CarouselComponent } from './carousel/carousel.component';
-import { LoginComponent } from './login/login.component';
-import { CatalogueComponent } from './catalogue/catalogue.component';
-import { ItemStyleComponent } from './item-style/item-style.component';
+import { CarouselComponent } from './Components/carousel/carousel.component';
+import { LoginComponent } from './Components/login/login.component';
+import { CatalogueComponent } from './Components/catalogue/catalogue.component';
+import { ItemStyleComponent } from './Components/item-style/item-style.component';
 import { getTypePipe } from './getTypePipe';
 import { getResistencePipe } from "./getResistancePipe";
-import { ValidationTableComponent } from './validation-table/validation-table.component';
+import { ValidationTableComponent } from './Components/validation-table/validation-table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
@@ -35,6 +35,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    FormsModule,
     FontAwesomeModule
   ],
   providers: [],
