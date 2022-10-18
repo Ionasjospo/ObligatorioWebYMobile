@@ -8,7 +8,7 @@ import { User } from "../User";
 })
 export class LoginComponent implements OnInit {
   logged : boolean = false;
-  userList: User[] = [ {username: "ionas", password: "1234"}];
+  userList: User[] = [ {username: "ionas", password: "ionas"}, {username: "lucas", password: "lucas"}];
   user?: User;
   /**
    * login

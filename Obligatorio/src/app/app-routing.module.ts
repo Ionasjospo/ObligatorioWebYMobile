@@ -5,9 +5,10 @@ import { CatalogueComponent } from './catalogue/catalogue.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent  },
-  { path: 'catalogue', component: CatalogueComponent },
-  { path: 'carrusel', component: CarouselComponent},
+  { path: '', component: LoginComponent  },
+  { path: 'home', component: CarouselComponent},
+  { path: 'catalogue', component: CatalogueComponent }
+  
   
 ];
 
