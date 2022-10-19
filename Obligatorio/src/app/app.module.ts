@@ -26,9 +26,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     LoginComponent,
     getTypePipe,
     getResistencePipe,
+    CatalogueComponent,
     ItemStyleComponent,
-    ValidationTableComponent,
-    CatalogueComponent
+    ValidationTableComponent
 
   ],
   imports: [

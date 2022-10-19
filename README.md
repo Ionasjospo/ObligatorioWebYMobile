@@ -8,7 +8,7 @@ La empresa Vientos Del Este necesita diseñar e implementar un software web y mo
 
 ![](Aspose.Words.8fc8b1ab-96d6-4f65-b637-3b40dc55c63c.002.jpeg)
 
-Para llevar acabo este sistema, el área de TI identificó los siguientes requerimientos:
+Para llevar a cabo este sistema, el área de TI identificó los siguientes requerimientos:
 
 Catálogo de piezas
 
