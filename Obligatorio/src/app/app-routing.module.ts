@@ -6,12 +6,11 @@ import { LoginComponent } from './Components/login/login.component';
 import { ValidationTableComponent } from './Components/validation-table/validation-table.component';
 
 const routes: Routes = [
-  { path: '', component: CarouselComponent},
-  { path: 'login', component: LoginComponent  },
+  { path: '', component: LoginComponent  },
+  { path: 'home', component: CarouselComponent},
   { path: 'catalogue', component: CatalogueComponent },
   { path: 'validation-table', component: ValidationTableComponent},
 
-  
 ];
 
 @NgModule({
