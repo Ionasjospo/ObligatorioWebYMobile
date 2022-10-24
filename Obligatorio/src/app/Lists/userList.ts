@@ -1,6 +1,6 @@
 import { User } from "../Interfaces/User";
 
 export const USERS: User[] = [
-    {username: "ionas", password: "1234"},
+    {username: "ionas", password: "ionas"},
     {username: "Lucas", password: "5678"}
 ]
