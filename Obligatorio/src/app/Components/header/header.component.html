@@ -9,10 +9,18 @@
         </button>
         <div class="collapse navbar-collapse row justify-content-end bg-light" id="navbarNavAltMarkup">
             <div class="navbar-nav col-lg-4">
-                <a class="nav-item nav-link " routerLink="/catalogue">Catalogue</a>
-                <a class="nav-item nav-link " routerLink="/design">Design</a>
-                <a class="nav-item nav-link " routerLink="validation-table">Validation</a>
-                <a class="nav-item nav-link " routerLink="/login">Login</a>
+                <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'"  routerLink="/catalogue">Catalogue</a>
+                <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'" routerLink="/design">Design</a>
+                <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'"  routerLink="validation-table">Validation</a>
+                <div *ngIf="login; else loggeOut">
+                    <a class="nav-item nav-link">Log out</a>
+                    
+
+                </div>
+                <ng-template #loggeOut>
+                    <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'" class="nav-item nav-link " routerLink="/login">Login</a>
+                </ng-template>
+                
             </div>
         </div>
     </nav>

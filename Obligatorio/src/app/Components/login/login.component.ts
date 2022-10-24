@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/Interfaces/User';
 import { UserListService } from 'src/app/Services/user-list.service';
+import { LoginService } from 'src/app/Services/login.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -8,42 +10,39 @@ import { UserListService } from 'src/app/Services/user-list.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  logged : boolean = false;
-  
-  constructor(private UserListService: UserListService) { }
-  
+
+  constructor(private UserListService: UserListService, private loginService: LoginService) { }
+
   ngOnInit(): void {
     this.getUsers();
+    
   }
   users: User[] = []
 
-  getUsers(): void{
+  getUsers(): void {
     this.users = this.UserListService.getUsers();
-   }
+  }
 
-  // userList: User[] = [ {username: "ionas", password: "1234"}];
+ 
   user?: User;
   /**
    * login
    */
-  public login(username:string, password:string) {
+  public login(username: string, password: string) {
     let finded = false;
     this.users.forEach(element => {
-      if(element.username == username){
+      if (element.username == username) {
         finded = true;
         this.user = element;
+      } if(!finded) {
+        alert("User doesnt find. Try again")
       }
     });
-    if (!finded) {
-      alert("User doesnt find. Try again")
+
+    if (this.user?.password == password) {
+      this.loginService.signIn();
     }
-    else
-    {
-      if (this.user?.password == password) {
-        alert("Welcome back, " + username);
-        this.logged = true;
-      }
-    }
+
   }
 
   /**
@@ -64,17 +63,17 @@ export class LoginComponent implements OnInit {
         }
       )
     }
-    else{
+    else {
       alert("The username has already exist.")
     }
-    }
-
-    /**
-     * newUser
-     */
-    private newUser(newUser : User) {
-      this.users.push(newUser);
-    }
-
-
   }
+
+  /**
+   * newUser
+   */
+  private newUser(newUser: User) {
+    this.users.push(newUser);
+  }
+
+
+}
