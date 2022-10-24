@@ -9,3 +9,9 @@
     background-color: #113c86!important;
     color: #F1F1F1 !important;
 }
+
+.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    
+}
