@@ -2,8 +2,42 @@
 
 const express = require('express');
 const cors = require('cors');
-const _ = require('lodash'); //
+const _ = require('lodash'); 
 const { v4: uuidv4 } = require('uuid');
+const mongo = require('mongoose');
+const path = require('path');
+const { MongoClient } = require("mongodb");
+
+// Replace the uri string with your connection string.
+const uri =
+  "mongodb://localhost:27017";
+
+const client = new MongoClient(uri);
+
+async function run() {
+    try {              
+        const database = client.db("Windmill"); 
+        const personCollection = database.collection("users"); 
+      
+        if ((await personCollection.countDocuments()) === 0) {
+          console.log("No hay documentos!");
+        } else{
+        const findResult1 = await personCollection.find({},{ projection: { _id: 0, user: 1, pass: 1 }}).toArray();
+        console.log('usuarios: ',findResult1);
+        }
+
+       }
+      
+       // Close connection
+       finally {
+        await client.close();
+       }
+      
+      }
+      
+      run().catch(console.dir);
+
+
 // Constants
 const PORT = 8090;
 const HOST = '0.0.0.0';
