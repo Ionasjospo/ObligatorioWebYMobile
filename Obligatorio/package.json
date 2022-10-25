@@ -26,9 +26,12 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@ng-bootstrap/ng-bootstrap": "^13.0.0",
     "@popperjs/core": "^2.10.2",
+    "body-parser": "^1.20.1",
     "bootstrap": "^5.2.2",
+    "express": "^4.18.2",
     "ionic-angular": "^3.9.10",
     "ionicons": "^6.0.3",
+    "mongoose": "^6.7.0",
     "rxjs": "~7.5.0",
     "zone.js": "~0.11.4"
   },
