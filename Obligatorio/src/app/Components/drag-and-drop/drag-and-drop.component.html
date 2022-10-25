@@ -1,0 +1,72 @@
+<!--
+    https://stackblitz.com/run?file=src%2Fapp%2Fcdk-drag-drop-connected-sorting-example.html
+    https://material.angular.io/cdk/drag-drop/overview#transferring-items-between-lists
+    https://blog.openreplay.com/drag-and-drop-with-angular-material/
+-->
+
+
+<div class="example-container1"  cdkDropListGroup>
+    <!-- <h2>To do</h2> -->
+    <div ngbDropdown class="d-inline-block">
+        <button type="button" class="btn btn-outline-primary filterByType" id="dropdownBasic1" ngbDropdownToggle>Filter by type</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button ngbDropdownItem (click)="filter(0)">Blades</button>
+          <button ngbDropdownItem (click)="filter(1)">Body</button>
+          <button ngbDropdownItem (click)="filter(2)">Base</button>
+          <button ngbDropdownItem (click)="filter(3)">All</button>
+        </div>
+      </div>
+    <div
+      cdkDropList
+      #catalogueList="cdkDropList"
+      [cdkDropListData]="todo"
+      [cdkDropListConnectedTo]="[bladesList, bodyList, baseList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let i of filteredItems" cdkDrag id={{i.id}}>
+        <app-item-style [item]="i" ></app-item-style>
+        </div>
+    </div>
+    
+  </div>
+  
+  <div class="example-container2">
+    <h2>Blades</h2>
+  
+    <div
+      cdkDropList
+      #bladesList="cdkDropList"
+      [cdkDropListData]="blades"
+      [cdkDropListConnectedTo]="[catalogueList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of blades" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+  <div class="example-container2">
+    <h2>Body</h2>
+  
+    <div
+      cdkDropList
+      #bodyList="cdkDropList"
+      [cdkDropListData]="body"
+      [cdkDropListConnectedTo]="[catalogueList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of body" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+  <div class="example-container2">
+    <h2>Base</h2>
+  
+    <div
+      cdkDropList
+      #baseList="cdkDropList"
+      [cdkDropListData]="base"
+      [cdkDropListConnectedTo]="[catalogueList]"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)">
+      <div class="example-box" *ngFor="let item of base" cdkDrag>{{item}}</div>
+    </div>
+  </div>
+  
