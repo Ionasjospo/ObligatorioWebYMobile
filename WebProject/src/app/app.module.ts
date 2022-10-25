@@ -15,6 +15,7 @@ import { getTypePipe } from './getTypePipe';
 import { getResistencePipe } from "./getResistancePipe";
 import { ValidationTableComponent } from './Components/validation-table/validation-table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from "@angular/common/http";
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
