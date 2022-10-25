@@ -18,6 +18,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from "@angular/common/http";
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.c
     FormsModule,
     FontAwesomeModule,
     HttpClientModule,
-    DragDropModule
+    DragDropModule,
+    NoopAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
