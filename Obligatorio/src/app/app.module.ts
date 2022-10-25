@@ -15,6 +15,8 @@ import { getTypePipe } from './getTypePipe';
 import { getResistencePipe } from "./getResistancePipe";
 import { ValidationTableComponent } from './Components/validation-table/validation-table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.component';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     getResistencePipe,
     CatalogueComponent,
     ItemStyleComponent,
-    ValidationTableComponent
+    ValidationTableComponent,
+    DragAndDropComponent
 
   ],
   imports: [
@@ -36,7 +39,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     AppRoutingModule,
     NgbModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

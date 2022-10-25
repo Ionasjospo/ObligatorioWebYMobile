@@ -13,4 +13,8 @@ export class ItemListService {
   getItems(): Item[] {
     return ITEMS;
   }
+
+  // getItemsImg(): Item[]{
+  //   return ITEMS
+  // }
 }
