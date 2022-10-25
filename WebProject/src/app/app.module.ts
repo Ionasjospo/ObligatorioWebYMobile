@@ -15,6 +15,7 @@ import { getTypePipe } from './getTypePipe';
 import { getResistencePipe } from "./getResistancePipe";
 import { ValidationTableComponent } from './Components/validation-table/validation-table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { HttpClientModule } from "@angular/common/http";
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.component';
 
@@ -40,6 +41,7 @@ import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.c
     NgbModule,
     FormsModule,
     FontAwesomeModule,
+    HttpClientModule,
     DragDropModule
   ],
   providers: [],
