@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Piece, Type, Resistance } from 'src/app/Interfaces/Piece';
-import { getTypePipe } from 'src/app/getTypePipe';
+import { Piece } from 'src/app/Interfaces/Piece';
 import { PieceListService } from 'src/app/Services/piece-list.service';
 
 
@@ -34,13 +33,14 @@ export class CatalogueComponent implements OnInit {
   /**
    * filter
    */
-  public filter(filter: number) {
+  public filter(filter: string) {
     this.filteredPieces = [];
     this.pieces.forEach(element => {
-      if (element.type == filter) {
+      let piece = element.type.toLowerCase();
+      if (piece == filter) {
         this.filteredPieces.push(element);
       }
-      if (filter == 3) {
+      else {
         this.filteredPieces = this.pieces;
       }
     });

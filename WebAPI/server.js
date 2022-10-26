@@ -75,6 +75,11 @@ app.get('/pieces', (req, res) => {
     res.send(piecesList);
   });
 
+app.post("/login", (req, res) => {
+
+});
+
+
 // app.post('/pieces', (req, res) => {   
 //   let card = {
 //     id: uuidv4().toString(),

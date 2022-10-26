@@ -11,8 +11,6 @@ import { CarouselComponent } from './Components/carousel/carousel.component';
 import { LoginComponent } from './Components/login/login.component';
 import { CatalogueComponent } from './Components/catalogue/catalogue.component';
 import { ItemStyleComponent } from './Components/item-style/item-style.component';
-import { getTypePipe } from './getTypePipe';
-import { getResistencePipe } from "./getResistancePipe";
 import { ValidationTableComponent } from './Components/validation-table/validation-table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { HttpClientModule } from "@angular/common/http";
@@ -29,8 +27,6 @@ import { OnclickPieceComponent } from './Components/onclick-piece/onclick-piece.
     FooterComponent,
     CarouselComponent,
     LoginComponent,
-    getTypePipe,
-    getResistencePipe,
     CatalogueComponent,
     ItemStyleComponent,
     ValidationTableComponent,

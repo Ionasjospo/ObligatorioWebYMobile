@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Piece } from 'src/app/Interfaces/Piece';
-import { getTypePipe } from 'src/app/getTypePipe';
-import { getResistencePipe } from 'src/app/getResistancePipe';
 
 @Component({
   selector: 'app-onclick-piece',
