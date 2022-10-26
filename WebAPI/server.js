@@ -9,13 +9,14 @@ const path = require('path');
 const { MongoClient } = require("mongodb");
 const jwt = require('jsonwebtoken');
 
+
 // sign with RSA SHA256
-var privateKey = fs.readFileSync('private.key');
-var token = jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256'});
+// var privateKey = fs.readFileSync('private.key');
+// var token = jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256'});
 
 // Replace the uri string with your connection string.
 const uri =
-  "mongodb://localhost:27017";
+  "mongodb://obligatorio-web-mobile2:Qvhrmbo6F5ZdLNvwUXBMlpsJay1PFQHRp9qsmXmHwDiGVF0v0r1wzmv4RTD0qNNQfDu4VNlh9dqKKVnLJAILPQ==@obligatorio-web-mobile2.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@obligatorio-web-mobile2@";
 
 const client = new MongoClient(uri);
 
@@ -57,17 +58,7 @@ var corsOptions = { //cross domain
 app.use(express.json())
 app.use(cors(corsOptions));
 
-let piecesList = [
-  { id: 1, type: "Type.Blades", title: "Super aspas", img: "../../assets/blades.jpg", material: "Metal", height: "100", resistance: "Resistance.Low"},
-  { id: 2, type: "Type.Base", title: "La mejor base", img: "../../assets/body.jpg", material: "Metal", height: "200", resistance: "Resistance.Strong"},
-  { id: 3, type: "Type.Body", title: "Motorazo 5.0 biturbo", img: "../../assets/egine.jpg", material: "Metal", height: "95", resistance: "Resistance.Medium"},
-  { id: 4, type: "Type.Base", title: "La mejor base", img: "../../assets/body.jpg", material: "Metal", height: "200", resistance: "Resistance.Strong"},
-  { id: 5, type: "Type.Blades", title: "Super aspas", img: "../../assets/blades.jpg", material: "Metal", height: "100", resistance: "Resistance.Low"}
-];
-let usersList = [
-  {username: 'ionas', password: 'ionas'}
-];
- 
+
 app.get('/', (req, res) => {
   res.send('Welcome to our Windmill API ');
 });
