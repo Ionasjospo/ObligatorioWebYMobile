@@ -1,23 +1,11 @@
 export interface Piece {
     id: number;
     title: string;
-    type: Type;
+    type: string;
     img: string;
     material: string;
     height: string;
-    resistance: Resistance;
+    resistance: string;
 
 }
 
-export enum Type {
-	Blades,
-    Body,
-    Base
-}
-
-export enum Resistance {
-	Strong,
-    Medium,
-    Low
-}
- 
