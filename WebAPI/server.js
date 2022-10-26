@@ -7,6 +7,11 @@ const { v4: uuidv4 } = require('uuid');
 const mongo = require('mongoose');
 const path = require('path');
 const { MongoClient } = require("mongodb");
+const jwt = require('jsonwebtoken');
+
+// sign with RSA SHA256
+var privateKey = fs.readFileSync('private.key');
+var token = jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256'});
 
 // Replace the uri string with your connection string.
 const uri =
