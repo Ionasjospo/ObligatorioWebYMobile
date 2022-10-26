@@ -18,7 +18,13 @@ var corsOptions = { //cross domain
 app.use(express.json())
 app.use(cors(corsOptions));
 
-let piecesList = [];
+let piecesList = [
+  { id: 1, type: "Type.Blades", title: "Super aspas", img: "../../assets/blades.jpg", material: "Metal", height: "100", resistance: "Resistance.Low"},
+  { id: 2, type: "Type.Base", title: "La mejor base", img: "../../assets/body.jpg", material: "Metal", height: "200", resistance: "Resistance.Strong"},
+  { id: 3, type: "Type.Body", title: "Motorazo 5.0 biturbo", img: "../../assets/egine.jpg", material: "Metal", height: "95", resistance: "Resistance.Medium"},
+  { id: 4, type: "Type.Base", title: "La mejor base", img: "../../assets/body.jpg", material: "Metal", height: "200", resistance: "Resistance.Strong"},
+  { id: 5, type: "Type.Blades", title: "Super aspas", img: "../../assets/blades.jpg", material: "Metal", height: "100", resistance: "Resistance.Low"}
+];
 let usersList = [
   {username: 'ionas', password: 'ionas'}
 ];
@@ -32,17 +38,17 @@ app.get('/users', (req, res) => {
 });
 
 app.get('/pieces', (req, res) => {
-    res.send(itemsList);
+    res.send(piecesList);
   });
 
-app.post('/pieces', (req, res) => {   
-  let card = {
-    id: uuidv4().toString(),
-    text: req.body.text
-  }
-  cards.push(card) 
-  res.send(card);
-});
+// app.post('/pieces', (req, res) => {   
+//   let card = {
+//     id: uuidv4().toString(),
+//     text: req.body.text
+//   }
+//   cards.push(card) 
+//   res.send(card);
+// });
 
 app.put('/card/:id', (req, res) => {    
   let card = {

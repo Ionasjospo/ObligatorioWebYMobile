@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Item, Type, Resistance } from './Interfaces/Item';
+import { Piece, Type, Resistance } from './Interfaces/Piece';
 
 @Pipe({name: 'getResistance'})
 export class getResistencePipe implements PipeTransform {
