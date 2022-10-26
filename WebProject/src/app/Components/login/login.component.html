@@ -5,7 +5,7 @@
         <div class="container-fluid h-custom">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-md-9 col-lg-6 col-xl-5">
-              <img src="..\assets\dios.jpg"
+              <img src="..\assets\logo.png"
                 class="img-fluid" alt="Sample image">
             </div>
             <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
@@ -31,7 +31,7 @@
                   <div *ngIf="invalidLogin"> <h6 class="danger"> User or password incorrect. Try again. </h6></div>
                   
                   
-                  <button type="submit" (click)="login(userInput.value, passwordInput.value)" routerLink="{{loginRoute()}}" class="btn btn-primary btn-lg"
+                  <button type="submit" (click)="login(userInput.value, passwordInput.value)" class="btn btn-primary btn-lg"
                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                   
                 </div>

@@ -2,11 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Piece } from 'src/app/Interfaces/Piece';
 
 @Component({
-  selector: 'app-item-style',
-  templateUrl: './item-style.component.html',
-  styleUrls: ['./item-style.component.scss']
+  selector: 'app-onclick-piece',
+  templateUrl: './onclick-piece.component.html',
+  styleUrls: ['./onclick-piece.component.scss']
 })
-export class ItemStyleComponent implements OnInit {
+export class OnclickPieceComponent implements OnInit {
   @Input() piece?: Piece;
   constructor() { }
 

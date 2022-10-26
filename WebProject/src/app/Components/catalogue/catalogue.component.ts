@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Item, Type, Resistance } from 'src/app/Interfaces/Item';
-import { getTypePipe } from 'src/app/getTypePipe';
-import { ItemListService } from 'src/app/Services/item-list.service';
+import { Piece } from 'src/app/Interfaces/Piece';
+import { PieceListService } from 'src/app/Services/piece-list.service';
 
 
 @Component({
@@ -11,34 +10,39 @@ import { ItemListService } from 'src/app/Services/item-list.service';
 })
 export class CatalogueComponent implements OnInit {
 
-  constructor(private ItemListService: ItemListService) { }
+  constructor(private pieceListService: PieceListService) { }
 
-  ngOnInit(): void { 
-      this.getItems();
-   }
+  ngOnInit(): void {
+    this.start();
+  }
 
-   items: Item[] = [];
-   filteredItems:Item[] = [];
-
-   getItems(): void{
-    this.items = this.ItemListService.getItems();
-    this.filteredItems = this.ItemListService.getItems();
-   }
+  pieces: Piece[] = [];
+  filteredPieces: Piece[] = [];
 
 
-  
+  /**
+     * start
+     */
+  public start() {
+    this.pieceListService.getPieces().subscribe(
+      dataPieces => { this.pieces = dataPieces; 
+      this.filteredPieces = dataPieces }
+    )
+  }
+
   /**
    * filter
    */
-  public filter(filter : number) {
-    this.filteredItems = [];
-    this.items.forEach(element => { 
-      if (element.type == filter) {
-        this.filteredItems.push(element);
+  public filter(filter: string) {
+    this.filteredPieces = [];
+    this.pieces.forEach(element => {
+      let piece = element.type.toLowerCase();
+      if (piece == filter) {
+        this.filteredPieces.push(element);
       }
-      if (filter == 3) {
-        this.filteredItems = this.items;
+      else {
+        this.filteredPieces = this.pieces;
       }
     });
-    }
+  }
 }

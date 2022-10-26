@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Item, Type, Resistance } from 'src/app/Interfaces/Item';
-import { getTypePipe } from 'src/app/getTypePipe';
-import { ItemListService } from 'src/app/Services/item-list.service';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { Piece } from 'src/app/Interfaces/Piece';
+import { PieceListService } from 'src/app/Services/piece-list.service';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 
 
 @Component({
@@ -12,14 +11,11 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 })
 export class DragAndDropComponent implements OnInit {
 
-  constructor(private ItemListService: ItemListService) { }
+  constructor(private pieceListService: PieceListService) { }
 
   ngOnInit(): void {
-    this.getItems();
+    this.start();
   }
-
-  items: Item[] = [];
-  filteredItems:Item[] = [];
 
   todo = ['a'];
 
@@ -27,23 +23,37 @@ export class DragAndDropComponent implements OnInit {
   body = ['Get up', 'Brush teeth'];
   base = ['Get up', 'Brush teeth'];
 
-  getItems(): void{
-    this.items = this.ItemListService.getItems();
-    this.filteredItems = this.ItemListService.getItems();
-   }
+  pieces: Piece[] = [];
+  filteredPieces: Piece[] = [];
 
-  public filter(filter : number) {
-    this.filteredItems = [];
-    this.items.forEach(element => { 
-      if (element.type == filter) {
-        this.filteredItems.push(element);
+
+  /**
+     * start
+     */
+  public start() {
+    this.pieceListService.getPieces().subscribe(
+      dataPieces => {
+        this.pieces = dataPieces;
+        this.filteredPieces = dataPieces;
       }
-      if (filter == 3) {
-        this.filteredItems = this.items;
+    )
+  }
+
+  /**
+    * filter
+    */
+  public filter(filter: string) {
+    this.filteredPieces = [];
+    this.pieces.forEach(element => {
+      let piece = element.type.toLowerCase();
+      if (piece == filter) {
+        this.filteredPieces.push(element);
+      }
+      else {
+        this.filteredPieces = this.pieces;
       }
     });
-    }
-
+  }
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
