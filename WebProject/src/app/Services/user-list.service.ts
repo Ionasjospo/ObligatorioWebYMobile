@@ -13,4 +13,9 @@ export class UserListService {
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>('http://localhost:8090/users');
   }
+
+  login(user : User){
+    return this.http.post<User>('http://localhost:8090/login', user);
+  }
+
 }
