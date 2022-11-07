@@ -48,11 +48,12 @@ app.get('/pieces', (req, res) => {
 app.post("/login", async (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
-  const mongoManager = new mdbM.mongoManager();
+  const mongoManager = new mdbM.mongoManager("users");
   const db = await mongoManager.connect();
-  //let userCollection = db.collections("users")
+  
   let user = await mongoManager.findCollection("user", username);
-  if (user.length != 0) {
+  
+  if (undefined || user.length!= 0) {
     if (user[0].pass == password) {
       res.send("Lo encontre y tienen la misma contraseña");
     } else {
