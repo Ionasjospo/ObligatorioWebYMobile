@@ -55,7 +55,7 @@ app.post("/login", async (req, res) => {
   
   if (undefined || user.length!= 0) {
     if (user[0].pass == password) {
-      res.send("Lo encontre y tienen la misma contraseña");
+      res.send({user: user[0]}); //agregar token cuando lo hagamos
     } else {
       res.status(400).json({ error: "password doesn't match" });
     }

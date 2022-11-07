@@ -9,6 +9,7 @@ import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.c
 const routes: Routes = [
   { path: '', component: LoginComponent  },
   { path: 'home', component: CarouselComponent},
+  { path: 'login', component: LoginComponent},
   { path: 'catalogue', component: CatalogueComponent },
   { path: 'validation-table', component: ValidationTableComponent},
   {path: 'design', component: DragAndDropComponent},

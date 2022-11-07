@@ -3,6 +3,7 @@ import { User } from 'src/app/Interfaces/User';
 import { UserListService } from 'src/app/Services/user-list.service';
 import { LoginService } from 'src/app/Services/login.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,9 @@ import { Observable } from 'rxjs';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userListService: UserListService, private loginService: LoginService) { }
+  constructor(private route : Router, private userListService: UserListService, private loginService: LoginService) { }
 
   ngOnInit(): void {
-    this.start();
-
   }
   users: User[] = [];
 
@@ -23,14 +22,6 @@ export class LoginComponent implements OnInit {
   validLogin: boolean = false;
   noLoginTry: boolean = true;
 
-  /**
-   * start
-   */
-  public start() {
-    this.userListService.getUsers().subscribe(
-      dataUsers => { this.users = dataUsers }
-    )
-  }
 
   /**
    * preLogin
@@ -46,50 +37,21 @@ export class LoginComponent implements OnInit {
    * login
    */
   public login(username: string, password: string) {
-    this.noLoginTry = false;
-    this.users.forEach(u => {
-      if (u.username == username) {
-        if (u.password == password) {
-          this.loginService.signIn();
-          this.invalidLogin = false;
-          this.validLogin = true;
-        }
+    this.userListService.login({username: username, password : password}).subscribe((res:any) => {
+      this.validLogin = res.user !== undefined;
+      if(this.validLogin) {
+        this.route.navigate(["/home"])
       }
-    });
-    if (this.validLogin == false) {
-      this.invalidLogin = true;
-      this.validLogin = false;
-    }
+    });  
   }
-  /**
-   * validationUser
-   */
-  // public validationUser(newUsername: string, newPassword: string) {
-  //   let validUser = false;
-  //   this.users.forEach(element => {
-  //     if (element.username == newUsername) {
-  //       validUser = true;
-  //     }
-  //   });
-  //   if (!validUser) {
-  //     this.newUser(
-  //       {
-  //         username: newUsername,
-  //         password: newPassword
-  //       }
-  //     )
-  //   }
-  //   else {
-  //     alert("The username has already exist.")
-  //   }
-  // }
+  
 
-  /**
-   * newUser
-   */
-  private newUser(newUser: User) {
-    this.users.push(newUser);
-  }
+  // /**
+  //  * newUser
+  //  */
+  // private newUser(newUser: User) {
+  //   this.users.push(newUser);
+  // }
 
 
 }
