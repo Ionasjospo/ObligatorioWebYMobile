@@ -15,7 +15,6 @@ export class LoginService {
    * getLogStatus
    */
   public getLogStatus() : Observable<boolean> {
-    
     return this.itsLogin$.asObservable();
   }
 
