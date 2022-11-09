@@ -23,15 +23,7 @@ export class LoginComponent implements OnInit {
   noLoginTry: boolean = true;
 
 
-  /**
-   * preLogin
-   */
-  public loginRoute() : string {
-    if(this.validLogin){
-      return "/home";
-    }
-    return "/login";
-  }
+ 
   
   /**
    * login
@@ -41,6 +33,10 @@ export class LoginComponent implements OnInit {
       this.validLogin = res.user !== undefined;
       if(this.validLogin) {
         this.route.navigate(["/home"])
+        this.loginService.logIn();
+      }
+      else{
+        this.loginService.logOut();
       }
     });  
   }

@@ -19,17 +19,17 @@ export class LoginService {
   }
 
   /**
-   * signIn
+   * logIn
    */
-  public signIn() {
+  public logIn() {
     this.itsLogin = true;
     this.itsLogin$.next(this.itsLogin);
   }
 
   /**
-   * signOut
+   * logOut
    */
-  public signOut() {
+  public logOut() {
     this.itsLogin = false;
     this.itsLogin$.next(this.itsLogin);
   }
