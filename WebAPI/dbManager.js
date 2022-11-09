@@ -25,13 +25,24 @@ class mongoManager {
         }
     }
 
-    async findCollection(filter, paramToFind){
+    async findCollectionAndElement(collection, paramToFind){
+        if (this.dbString == undefined) {
+            this.dbString = process.env.MONGO_DB;
+            await this.client.db(this.dbString); 
+        }
+        let filter = {};
+        filter[collection] = paramToFind;
+        const db = await this.client.db(this.dbString); 
+        const col = await db.collection(this.collection).find(filter).toArray();
+        return col
+    }
+    async getOneCollection(){
         if (this.dbString == undefined) {
             this.dbString = process.env.MONGO_DB;
             await this.client.db(this.dbString); 
         }
         const db = await this.client.db(this.dbString); 
-        const col = await db.collection(this.collection).find({"user":"ionas"}).toArray();
+        const col = await db.collection(this.collection).toArray();
         return col
     }
 }

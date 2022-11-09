@@ -15,22 +15,21 @@ export class LoginService {
    * getLogStatus
    */
   public getLogStatus() : Observable<boolean> {
-    
     return this.itsLogin$.asObservable();
   }
 
   /**
-   * signIn
+   * logIn
    */
-  public signIn() {
+  public logIn() {
     this.itsLogin = true;
     this.itsLogin$.next(this.itsLogin);
   }
 
   /**
-   * signOut
+   * logOut
    */
-  public signOut() {
+  public logOut() {
     this.itsLogin = false;
     this.itsLogin$.next(this.itsLogin);
   }

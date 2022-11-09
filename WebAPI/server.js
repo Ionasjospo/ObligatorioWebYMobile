@@ -41,8 +41,12 @@ app.get('/users', (req, res) => {
   res.send(usersList);
 });
 
-app.get('/pieces', (req, res) => {
-  res.send(piecesList);
+app.get('/pieces', async(req, res) => {
+  const mongoManager = new mdbM.mongoManager("pieces");
+  const db = await mongoManager.connect();
+  
+  let pieces = await mongoManager.findCollection();
+  res.send(pieces);
 });
 
 app.post("/login", async (req, res) => {
@@ -51,11 +55,11 @@ app.post("/login", async (req, res) => {
   const mongoManager = new mdbM.mongoManager("users");
   const db = await mongoManager.connect();
   
-  let user = await mongoManager.findCollection("user", username);
+  let user = await mongoManager.findCollectionAndElement("user", username);
   
   if (undefined || user.length!= 0) {
     if (user[0].pass == password) {
-      res.send("Lo encontre y tienen la misma contraseña");
+      res.send({user: user[0]}); //agregar token cuando lo hagamos
     } else {
       res.status(400).json({ error: "password doesn't match" });
     }
