@@ -34,6 +34,8 @@ export class LoginComponent implements OnInit {
       if(this.validLogin) {
         this.route.navigate(["/home"])
         this.loginService.logIn();
+        localStorage.setItem('jwt', res.jwtToken);
+
       }
       else{
         this.loginService.logOut();
