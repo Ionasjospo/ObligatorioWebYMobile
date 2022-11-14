@@ -11,6 +11,7 @@ class mongoManager {
     client;
     dbString;
     collection;
+    
     constructor(collection) {
         this.client = new MongoClient(process.env.MONGO_STRING);
         this.dbString = process.env.MONGO_DB;
@@ -43,7 +44,7 @@ class mongoManager {
             await this.client.db(this.dbString); 
         }
         const db = await this.client.db(this.dbString); 
-        const col = await db.collection(this.collection).toArray();
+        var col = await db.collection(this.collection).find({}).toArray();
         return col
     }
     async insertElement(element)
