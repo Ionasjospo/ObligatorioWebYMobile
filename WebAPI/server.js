@@ -72,14 +72,13 @@ app.post("/login", async (req, res) => {
   let password = req.body.password;
   const mongoManager = new mdbM.mongoManager("users");
   const db = await mongoManager.connect();
-
-  let user = await mongoManager.findCollectionAndElement("user", username);
-
+  let user = await mongoManager.findCollectionAndElement("username", username);
+  
   if (undefined || user.length != 0) {
 
-    // const result = await bcrypt.compare(req.body.password, user.password);
-
-    if (user[0].pass == password) {
+    const result = await bcrypt.compare(req.body.password, user[0].password);
+    
+    if (result) {
       const token = await jwt.sign({ username: user.username }, SECRET);
       console.log(token);
       // res.json({ token });
