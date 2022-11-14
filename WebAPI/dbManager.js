@@ -6,6 +6,7 @@ const { indexOf, findIndex } = require('lodash');
 const { count } = require('console');
 
 
+
 class mongoManager {
     client;
     dbString;
@@ -44,6 +45,16 @@ class mongoManager {
         }
         const db = await this.client.db(this.dbString); 
         var col = await db.collection(this.collection).find({}).toArray();
+        return col
+    }
+    async insertElement(element)
+    {
+        if (this.dbString == undefined) {
+            this.dbString = process.env.MONGO_DB;
+            await this.client.db(this.dbString); 
+        }
+        const db = await this.client.db(this.dbString); 
+        const col = await db.collection(this.collection).insertOne(element);
         return col
     }
 }

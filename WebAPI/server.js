@@ -7,19 +7,20 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const { indexOf, findIndex } = require('lodash');
 const { count } = require('console');
-//import { mongoManager } from './dbManager';
 const mdbM = require('./dbManager.js');
+require("dotenv").config()
+const morgan = require("morgan")
+const { log } = require("mercedlogger")
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 
-// const jwt = require('jsonwebtoken');
-
-// sign with RSA SHA256
-// var privateKey = fs.readFileSync('private.key');
-// var token = jwt.sign({ foo: 'bar' }, privateKey, { algorithm: 'RS256'});
+const { SECRET = "secret" } = process.env;
 
 
 // Constants
-const PORT = 8090;
+// const PORT = 8090;
+const { PORT = 3000 } = process.env
 const HOST = '0.0.0.0';
 
 // App
@@ -30,6 +31,7 @@ var corsOptions = { //cross domain
   methods: "GET, POST, PUT, DELETE"
 }
 app.use(express.json())
+app.use(morgan("tiny"))
 app.use(cors(corsOptions));
 
 
@@ -37,12 +39,32 @@ app.get('/', (req, res) => {
   res.send('Welcome to our Windmill API ');
 });
 
+
 app.get('/pieces', async(req, res) => {
   const mongoManager = new mdbM.mongoManager("pieces");
   const db = await mongoManager.connect();
   
   let pieces = await mongoManager.getOneCollection();
+
   res.send(pieces);
+});
+
+app.post("/signup", async (req, res) => {
+  //try {
+  // hash the password
+  req.body.password = await bcrypt.hash(req.body.password, 10);
+  // create a new user
+  const mongoManager = new mdbM.mongoManager("users");
+  const db = await mongoManager.connect();
+
+
+  await mongoManager.insertElement(req.body);
+  // send new user as response
+  res.json("ok");
+  console.log(req.body);
+  // } catch (error) {
+  //   res.status(400).json({ error });
+  // }
 });
 
 app.post("/login", async (req, res) => {
@@ -50,12 +72,23 @@ app.post("/login", async (req, res) => {
   let password = req.body.password;
   const mongoManager = new mdbM.mongoManager("users");
   const db = await mongoManager.connect();
-  
+
   let user = await mongoManager.findCollectionAndElement("user", username);
-  
-  if (undefined || user.length!= 0) {
+
+  if (undefined || user.length != 0) {
+
+    // const result = await bcrypt.compare(req.body.password, user.password);
+
     if (user[0].pass == password) {
-      res.send({user: user[0]}); //agregar token cuando lo hagamos
+      const token = await jwt.sign({ username: user.username }, SECRET);
+      console.log(token);
+      // res.json({ token });
+      res.send(
+        {
+          user: user[0],
+          jwtToken: token
+        }
+      ); //agregar token cuando lo hagamos
     } else {
       res.status(401).json({ error: "User or password incorrect. Try again." });
     }
@@ -97,6 +130,7 @@ app.post("/login", async (req, res) => {
 //   res.send(cards);
 // });
 
-
-app.listen(PORT, HOST);
+// APP LISTENER
+app.listen(PORT, () => log.green("SERVER STATUS", `Listening on port ${PORT}`))
+// app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);
