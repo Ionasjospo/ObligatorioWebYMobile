@@ -37,15 +37,11 @@ app.get('/', (req, res) => {
   res.send('Welcome to our Windmill API ');
 });
 
-app.get('/users', (req, res) => {
-  res.send(usersList);
-});
-
 app.get('/pieces', async(req, res) => {
   const mongoManager = new mdbM.mongoManager("pieces");
   const db = await mongoManager.connect();
   
-  let pieces = await mongoManager.findCollection();
+  let pieces = await mongoManager.getOneCollection();
   res.send(pieces);
 });
 
@@ -61,11 +57,11 @@ app.post("/login", async (req, res) => {
     if (user[0].pass == password) {
       res.send({user: user[0]}); //agregar token cuando lo hagamos
     } else {
-      res.status(400).json({ error: "password doesn't match" });
+      res.status(401).json({ error: "User or password incorrect. Try again." });
     }
   }
   else {
-    res.status(400).json({ error: "User doesn't exist" });
+    res.status(401).json({ error: "User or password incorrect. Try again." });
   }
 
 

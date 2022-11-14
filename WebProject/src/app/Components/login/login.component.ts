@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit {
       }
       else{
         this.loginService.logOut();
+        this.invalidLogin = true;
       }
     });  
   }
