@@ -17,15 +17,18 @@ export class DragAndDropComponent implements OnInit {
     this.start();
   }
 
-  todo = ['a'];
-
-  blades = ['Get up', 'Brush teeth'];
-  body = ['Get up', 'Brush teeth'];
-  base = ['Get up', 'Brush teeth'];
-
+  
+  
+  
   pieces: Piece[] = [];
   filteredPieces: Piece[] = [];
-
+  
+  blades = [""];
+  body = [""];
+  base = [""];
+  
+  // blades=[(this.filter("blades"))];
+  todo = [this.filteredPieces];
 
   /**
      * start
@@ -54,16 +57,19 @@ export class DragAndDropComponent implements OnInit {
       }
     });
   }
-  drop(event: CdkDragDrop<string[]>) {
+
+  drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+      moveItemInArray(this.filteredPieces, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
-        event.previousContainer.data,
+        this.filteredPieces,
         event.container.data,
         event.previousIndex,
         event.currentIndex,
       );
+      console.log(this.filteredPieces);
+      
     }
   }
 }

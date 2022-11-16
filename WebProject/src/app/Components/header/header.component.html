@@ -11,15 +11,16 @@
             <div class="navbar-nav col-lg-4">
                 <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'"  routerLink="/catalogue">Catalogue</a>
                 <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'" routerLink="/design">Design</a>
-                <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'"  routerLink="validation-table">Validation</a>
+                <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'"  routerLink="/validation-table">Validation</a>
                 <div *ngIf="login; else loggeOut">
-                    <a class="nav-item nav-link" routerLink="">Log out</a>
+                    <a class="nav-item nav-link" routerLink="/login"><fa-icon [icon]="faSignOut"></fa-icon></a>
                     
-
+                    
                 </div>
                 <ng-template #loggeOut>
-                    <a class="nav-item nav-link " routerLink="/login">Login</a>
+                    <a class="nav-item nav-link " routerLink="/login"><fa-icon [icon]="faUser"></fa-icon></a>
                 </ng-template>
+                <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'"  routerLink="/login"><fa-icon [icon]="faGear"></fa-icon></a>
                 
             </div>
         </div>
