@@ -16,8 +16,10 @@ export class CatalogueComponent implements OnInit {
     this.start();
   }
 
-  pieces: Piece[] = [];
-  filteredPieces: Piece[] = [];
+  allPieces: Piece[] = [];
+  showPieces: Piece[] = [];
+  // pieceList : Piece[] = [];
+  //fttsp : boolean = true; 
 
 
   /**
@@ -25,24 +27,30 @@ export class CatalogueComponent implements OnInit {
      */
   public start() {
     this.pieceListService.getPieces().subscribe(
-      dataPieces => { this.pieces = dataPieces; 
-      this.filteredPieces = dataPieces }
-    )
+      dataPieces => { 
+      this.allPieces = dataPieces;
+      this.showPieces = dataPieces;
+    })
+    // if (this.fttsp) {
+    //   this.pieceList = this.pieces; 
+    // }
+    
   }
-
   /**
    * filter
    */
-  public filter(filter: string) {
-    this.filteredPieces = [];
-    this.pieces.forEach(element => {
-      let piece = element.type.toLowerCase();
-      if (piece == filter) {
-        this.filteredPieces.push(element);
+  public filter(filter: string) {    
+    
+    this.showPieces = [];
+    this.allPieces.forEach(element => {
+      if (element.type.toLowerCase() === filter) {
+        this.showPieces.push(element); 
       }
-      else {
-        this.filteredPieces = this.pieces;
+      if (filter == 'all') {
+        this.showPieces = this.allPieces; 
       }
+      //this.allPieces = this.showPieces;
     });
+    
   }
 }

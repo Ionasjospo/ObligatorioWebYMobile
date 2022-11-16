@@ -32,10 +32,9 @@ export class LoginComponent implements OnInit {
     this.userListService.login({username: username, password : password}).subscribe((res:any) => {
       this.validLogin = res.user !== undefined;
       if(this.validLogin) {
-        this.route.navigate(["/home"])
+        this.route.navigate(["/home"]);
         this.loginService.logIn();
         localStorage.setItem('jwt', res.jwtToken);
-
       }
       else{
         this.loginService.logOut();

@@ -18,6 +18,10 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OnclickPieceComponent } from './Components/onclick-piece/onclick-piece.component';
+import { InterceptorsService } from './Services/interceptors.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthGuard  } from "./Services/auth/auth.guard";
+import { AuthService } from './Services/auth-service.service';
 
 
 @NgModule({
@@ -42,9 +46,11 @@ import { OnclickPieceComponent } from './Components/onclick-piece/onclick-piece.
     FontAwesomeModule,
     HttpClientModule,
     DragDropModule,
-    NoopAnimationsModule
+    NoopAnimationsModule,
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorsService, multi: true },[AuthService, AuthGuard] ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

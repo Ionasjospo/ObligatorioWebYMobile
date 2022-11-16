@@ -12,8 +12,6 @@ export class PieceListService {
 
   constructor(private http : HttpClient) { }
 
-  // piecesList =this.http.get<Piece[]>('http://localhost:8090/pieces');
-
   getPieces(): Observable<Piece[]> {
     return this.http.get<Piece[]>('http://localhost:8090/pieces');
   }

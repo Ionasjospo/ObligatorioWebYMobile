@@ -22,15 +22,15 @@ export class LoginService {
    * logIn
    */
   public logIn() {
-    this.itsLogin = true;
-    this.itsLogin$.next(this.itsLogin);
+    // this.itsLogin = true;
+    this.itsLogin$.next(true);
   }
 
   /**
    * logOut
    */
   public logOut() {
-    this.itsLogin = false;
-    this.itsLogin$.next(this.itsLogin);
+    // this.itsLogin = false;
+    this.itsLogin$.next(false);
   }
 }
