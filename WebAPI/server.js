@@ -87,7 +87,7 @@ app.post("/login", async (req, res) => {
           user: user[0],
           jwtToken: token
         }
-      ); //agregar token cuando lo hagamos
+      ); 
     } else {
       res.status(401).json({ error: "User or password incorrect. Try again." });
     }
