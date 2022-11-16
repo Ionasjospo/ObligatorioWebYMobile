@@ -89,11 +89,11 @@ app.post("/login", async (req, res) => {
         }
       ); //agregar token cuando lo hagamos
     } else {
-      res.status(401).json({ error: "User or password incorrect. Try again." });
+      res.status(200).json({ error: "User or password incorrect. Try again." });
     }
   }
   else {
-    res.status(401).json({ error: "User or password incorrect. Try again." });
+    res.status(200).json({ error: "User or password incorrect. Try again." });
   }
 
 
