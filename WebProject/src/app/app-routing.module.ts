@@ -6,15 +6,17 @@ import { LoginComponent } from './Components/login/login.component';
 import { ValidationTableComponent } from './Components/validation-table/validation-table.component';
 import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.component';
 import { UserRegisterComponent } from './Components/user-register/user-register.component';
+import { AuthGuard  } from "./Services/auth/auth.guard";
 
 const routes: Routes = [
   { path: '', component: LoginComponent  },
-  { path: 'home', component: CarouselComponent},
+  { path: 'home', component: CarouselComponent, canActivate:[AuthGuard]},
   { path: 'login', component: LoginComponent},
   { path: 'catalogue', component: CatalogueComponent },
   { path: 'validation-table', component: ValidationTableComponent},
   {path: 'design', component: DragAndDropComponent},
   {path: 'register', component: UserRegisterComponent},
+
 ];
 
 @NgModule({
