@@ -5,6 +5,7 @@ import { LoginService } from 'src/app/Services/login.service';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   invalidLogin: boolean = false;
   validLogin: boolean = false;
-  noLoginTry: boolean = true;
+  loading: boolean = false;
 
 
  
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
    * login
    */
   public login(username: string, password: string) {
+    this.loading = true;
     this.userListService.login({username: username, password : password}).subscribe((res:any) => {
       this.validLogin = res.user !== undefined;
       if(this.validLogin) {
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
         this.loginService.logOut();
         this.invalidLogin = true;
       }
+      this.loading = false;
     });  
   }
   

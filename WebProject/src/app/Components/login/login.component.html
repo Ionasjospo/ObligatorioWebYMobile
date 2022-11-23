@@ -30,10 +30,14 @@
                 <div class="text-center text-lg-start mt-4 pt-2">
                   <div *ngIf="invalidLogin"> <h6 class="danger"> User or password incorrect. Try again. </h6></div>
                   
-                  
+
+
                   <button type="submit" (click)="login(userInput.value, passwordInput.value)" class="btn btn-primary btn-lg"
                     style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
                   
+                </div>
+                <div *ngIf="loading" class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
                 </div>
       
               </form>

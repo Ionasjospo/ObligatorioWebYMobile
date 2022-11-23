@@ -64,7 +64,7 @@ export class DragAndDropComponent implements OnInit {
     } else {
       transferArrayItem(
         this.filteredPieces,
-        event.container.data,
+        event.container.data, //ver que es, o armar un objeto para guardar (id,foto)
         event.previousIndex,
         event.currentIndex,
       );
