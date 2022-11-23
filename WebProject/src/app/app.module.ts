@@ -18,6 +18,7 @@ import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { OnclickPieceComponent } from './Components/onclick-piece/onclick-piece.component';
+import { UserRegisterComponent } from './Components/user-register/user-register.component';
 import { InterceptorsService } from './Services/interceptors.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard  } from "./Services/auth/auth.guard";
@@ -36,7 +37,8 @@ import { AuthService } from './Services/auth-service.service';
     ItemStyleComponent,
     ValidationTableComponent,
     DragAndDropComponent,
-    OnclickPieceComponent
+    OnclickPieceComponent,
+    UserRegisterComponent
 
   ],
   imports: [

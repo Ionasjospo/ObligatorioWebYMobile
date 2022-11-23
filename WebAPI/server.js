@@ -73,7 +73,7 @@ app.get('/pieces', async (req, res) => {
   res.send(pieces);
 });
 
-app.post("/signup", async (req, res) => {
+app.post("/register", async (req, res) => {
   //try {
   // hash the password
   req.body.password = await bcrypt.hash(req.body.password, 10);
