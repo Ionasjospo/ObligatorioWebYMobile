@@ -18,4 +18,8 @@ export class UserListService {
     return this.http.post<User>('http://localhost:8090/login', user);
   }
 
+  getActualUser():Observable<User> {
+    return this.http.get<User>('http://localhost:8090/actualUser');
+  }
+
 }

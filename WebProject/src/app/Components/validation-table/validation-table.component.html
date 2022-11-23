@@ -4,12 +4,26 @@
       <tr>
         <th scope="col">#id</th>
         <th scope="col">By</th>
-        <th scope="col">Design Date</th>
+        <th scope="col">Description</th>
         <th scope="col">Valid</th>
       </tr>
     </thead>
-    <tbody>
-      <tr>
+    
+    <tbody *ngFor="let windmill of toValidate">
+      
+        <tr>
+        <th scope="row">{{toValidate.indexOf(windmill)}}</th>
+        
+     
+        <!-- <td>{{windmill.user.username}}</td> -->
+        <td>{{windmill.windmill.description}}</td>
+        <td><button class="btn btn-success faiconstyle"><fa-icon [icon]="faCircleCheck"></fa-icon></button><button class="btn btn-danger faiconstyle"><fa-icon [icon]="faTrash"></fa-icon></button></td>
+        
+      </tr>
+      
+      
+      
+      <!-- <tr>
         <th scope="row">1</th>
         <td>Mark</td>
         <td>Otto</td>
@@ -26,7 +40,7 @@
         <td>Larry</td>
         <td>the bird</td>
         <td><button class="btn btn-success faiconstyle"><fa-icon [icon]="faCircleCheck"></fa-icon></button><button class="btn btn-danger faiconstyle"><fa-icon [icon]="faTrash"></fa-icon></button></td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>

@@ -36,28 +36,30 @@ app.use(cors(corsOptions));
 
 
 app.use(function (req, res, next) {
-  if(req.url.toString().includes('login') ){
+  if (req.url.toString().includes('login')) {
     next();
-  }else {
+  } else {
     try {
-      
+
       var jwtToken = req.headers["authorization"];
       //console.log(jwtToken);
       var itsValid = jwt.verify(jwtToken, SECRET);
       if (itsValid) {
         next();
       }
-      else{
-        res.send({"data": 'Invalid Token'});
+      else {
+        res.send({ "data": 'Invalid Token' });
       }
-      
+
     } catch (error) {
-      res.send({"data": error});
+      res.send({ "data": error });
     }
   }
-  
- 
+
+
 });
+
+
 
 app.get('/', (req, res) => {
   res.send('Welcome to our Windmill API ');
@@ -73,6 +75,24 @@ app.get('/pieces', async (req, res) => {
   res.send(pieces);
 });
 
+app.get('/windmillToValidate', async (req, res) => {
+  const mongoManager = new mdbM.mongoManager("windmillToValidate");
+  const db = await mongoManager.connect();
+
+  let windmills = await mongoManager.getOneCollection();
+
+  res.send(windmills);
+});
+
+app.post("addWindmill", async (req, res) => {
+    const mongoManager = new mdbM.mongoManager("windmillToValidate");
+    const db = await mongoManager.connect();
+    console.log("dcfdsf"+req.headers)
+    await mongoManager.insertElement(req.headers);
+    res.json("ok");
+
+});
+
 app.post("/register", async (req, res) => {
   //try {
   // hash the password
@@ -83,22 +103,31 @@ app.post("/register", async (req, res) => {
   const db = await mongoManager.connect();
   let user = await mongoManager.findCollectionAndElement("username", username);
 
-  if (user.length != 0){
+  if (user.length != 0) {
     console.log("Username already exists!");
-  } else{
+  } else {
     await mongoManager.insertElement(req.body);
     // send new user as response
     res.json("ok");
     console.log(req.body);
     console.log("Registered!");
-    
+
     // } catch (error) {
     //   res.status(400).json({ error });
     // }
-    
+
   }
 
 });
+var actualUser;
+app.get("/actualUser", (req, res) => {
+  try {
+    res.send(actualUser);
+  } catch (error) {
+    res.status(200).json({ error: "Undefined User" });
+  }
+
+})
 
 app.post("/login", async (req, res) => {
   let username = req.body.username;
@@ -106,7 +135,7 @@ app.post("/login", async (req, res) => {
   const mongoManager = new mdbM.mongoManager("users");
   const db = await mongoManager.connect();
   let user = await mongoManager.findCollectionAndElement("username", username);
-
+  actualUser = user;
   if (undefined || user.length != 0) {
 
     const result = await bcrypt.compare(req.body.password, user[0].password);
@@ -120,7 +149,9 @@ app.post("/login", async (req, res) => {
           user: user[0], //cambiar user solo por rol asi no va la pass encriptada
           jwtToken: token
         }
+
       );
+
     } else {
       res.status(200).json({ error: "User or password lkj incorrect. Try again." });
     }
