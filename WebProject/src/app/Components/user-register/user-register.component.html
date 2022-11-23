@@ -9,24 +9,25 @@
           </tr>
         </thead>
         <tbody>
+            <!-- <form #loginForm="ngForm" method="POST" action="/register" > -->
           <tr>
-            <th scope="row"><input type="email" required #userRegisterInput class="form-control form-control-md"
-                placeholder="Username" /></th>
+            <td scope="row"><input type="email" required #userRegisterInput class="form-control form-control-md"
+                placeholder="Username" /></td>
             <td><input type="password" required #passwordRegisterInput class="form-control form-control-md"
                 placeholder="Enter password" autocomplete="off" /></td>
            
-                <td><div ngbDropdown class="d-inline-block">
-                    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Roles</button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <ul>
-                            <li ngbDropdownItem *ngFor="let i of roles" #roleInput>{{i}}</li>
-                        </ul>
+            <td>
+                  <div class="mb-3 row">
+                    <label for="typeahead-config" class="col-xs-3 col-sm-auto col-form-label"></label>
+                    <div class="col">
+                      <input id="typeahead-config" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" #roleRegisterInput placeholder="Admin | Operator | Auditor" />
                     </div>
-                  </div></td>
-            <td><button class="btn btn-success" type="submit" (click)="register(userRegisterInput.value, passwordRegisterInput.value)">REGISTER</button></td>
-            
+                  </div>
+              </td>
+            <td><button class="btn btn-success" type="submit" (click)="register(userRegisterInput.value, passwordRegisterInput.value, roleRegisterInput.value)">REGISTER</button></td>
         </tr>
         
+    <!-- </form> -->
     </tbody>
 </table>
 
