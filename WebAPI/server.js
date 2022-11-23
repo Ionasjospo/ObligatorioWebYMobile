@@ -76,19 +76,28 @@ app.get('/pieces', async (req, res) => {
 app.post("/register", async (req, res) => {
   //try {
   // hash the password
+  let username = req.body.username;
   req.body.password = await bcrypt.hash(req.body.password, 10);
   // create a new user
   const mongoManager = new mdbM.mongoManager("users");
   const db = await mongoManager.connect();
+  let user = await mongoManager.findCollectionAndElement("username", username);
 
+  if (user.length != 0){
+    console.log("Username already exists!");
+  } else{
+    await mongoManager.insertElement(req.body);
+    // send new user as response
+    res.json("ok");
+    console.log(req.body);
+    console.log("Registered!");
+    
+    // } catch (error) {
+    //   res.status(400).json({ error });
+    // }
+    
+  }
 
-  await mongoManager.insertElement(req.body);
-  // send new user as response
-  res.json("ok");
-  console.log(req.body);
-  // } catch (error) {
-  //   res.status(400).json({ error });
-  // }
 });
 
 app.post("/login", async (req, res) => {
@@ -103,7 +112,7 @@ app.post("/login", async (req, res) => {
     const result = await bcrypt.compare(req.body.password, user[0].password);
 
     if (result) {
-      const token = await jwt.sign({ username: user.username /*, rol:user[0].rol */ }, SECRET);
+      const token = await jwt.sign({ username: user.username /*, role:user[0].role */ }, SECRET);
       //console.log(token);
       // res.json({ token });
       res.send(

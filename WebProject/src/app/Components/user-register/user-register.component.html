@@ -16,23 +16,15 @@
             <td><input type="password" required #passwordRegisterInput class="form-control form-control-md"
                 placeholder="Enter password" autocomplete="off" /></td>
            
-                <td>
-                    <!-- <div ngbDropdown class="d-inline-block">
-                    <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Roles</button>
-                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-                        <ul>
-                            <li ngbDropdownItem *ngFor="let i of roles" #role>{{i}}</li>
-                        </ul>
+            <td>
+                  <div class="mb-3 row">
+                    <label for="typeahead-config" class="col-xs-3 col-sm-auto col-form-label"></label>
+                    <div class="col">
+                      <input id="typeahead-config" type="text" class="form-control" [(ngModel)]="model" [ngbTypeahead]="search" #roleRegisterInput placeholder="Admin | Operator | Auditor" />
                     </div>
-                  </div> -->
-                  <form autocomplete="off">
-                    <div class="autocomplete" style="width:300px;">
-                      <input id="myInput" type="text" name="myCountry" placeholder="Country">
-                    </div>
-                    <input type="submit">
-                  </form>
-                </td>
-            <td><button class="btn btn-success" type="submit" (click)="register(userRegisterInput.value, passwordRegisterInput.value)">REGISTER</button></td>
+                  </div>
+              </td>
+            <td><button class="btn btn-success" type="submit" (click)="register(userRegisterInput.value, passwordRegisterInput.value, roleRegisterInput.value)">REGISTER</button></td>
         </tr>
         
     <!-- </form> -->

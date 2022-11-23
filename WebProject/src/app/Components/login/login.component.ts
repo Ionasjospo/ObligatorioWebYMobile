@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
    */
   public login(username: string, password: string) {
     this.loading = true;
-    this.userListService.login({username: username, password : password}).subscribe((res:any) => {
+    this.userListService.login({username: username, password : password, role: ''}).subscribe((res:any) => {
       this.validLogin = res.user !== undefined;
       if(this.validLogin) {
         this.route.navigate(["/home"]);
