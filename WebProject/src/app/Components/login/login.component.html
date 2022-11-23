@@ -35,6 +35,9 @@
                     >Login</button>
                   
                 </div>
+                <div *ngIf="loading" class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div>
       
               </form>
             </div>

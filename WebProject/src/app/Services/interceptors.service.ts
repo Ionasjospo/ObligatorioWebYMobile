@@ -9,22 +9,26 @@ import { throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class InterceptorsService implements HttpInterceptor {
+  constructor(private route : Router){
 
+  }
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     try {
-      const token = localStorage.getItem('jwt');
+       const token = localStorage.getItem('jwt');
+      
       if (!token) {
-        return next.handle(req);
+          
+         return next.handle(req);
       }
       req = req.clone({
         setHeaders: {
-          'jwt': token
+          'authorization': token
         },
       }); 
       
     } catch (err : any) {
       if (err.status === 401 || err.status === 403) {
-
+        this.route.navigate(["/home"]);
         throwError(() => new Error(err))
       }
 

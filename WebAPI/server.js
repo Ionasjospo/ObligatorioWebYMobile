@@ -35,15 +35,39 @@ app.use(morgan("tiny"))
 app.use(cors(corsOptions));
 
 
+app.use(function (req, res, next) {
+  if(req.url.toString().includes('login') ){
+    next();
+  }else {
+    try {
+      
+      var jwtToken = req.headers["authorization"];
+      //console.log(jwtToken);
+      var itsValid = jwt.verify(jwtToken, SECRET);
+      if (itsValid) {
+        next();
+      }
+      else{
+        res.send({"data": 'Invalid Token'});
+      }
+      
+    } catch (error) {
+      res.send({"data": error});
+    }
+  }
+  
+ 
+});
+
 app.get('/', (req, res) => {
   res.send('Welcome to our Windmill API ');
 });
 
 
-app.get('/pieces', async(req, res) => {
+app.get('/pieces', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("pieces");
   const db = await mongoManager.connect();
-  
+
   let pieces = await mongoManager.getOneCollection();
 
   res.send(pieces);
@@ -73,27 +97,27 @@ app.post("/login", async (req, res) => {
   const mongoManager = new mdbM.mongoManager("users");
   const db = await mongoManager.connect();
   let user = await mongoManager.findCollectionAndElement("username", username);
-  
+
   if (undefined || user.length != 0) {
 
     const result = await bcrypt.compare(req.body.password, user[0].password);
-    
+
     if (result) {
-      const token = await jwt.sign({ username: user.username }, SECRET);
-      console.log(token);
+      const token = await jwt.sign({ username: user.username /*, rol:user[0].rol */ }, SECRET);
+      //console.log(token);
       // res.json({ token });
       res.send(
         {
-          user: user[0],
+          user: user[0], //cambiar user solo por rol asi no va la pass encriptada
           jwtToken: token
         }
-      ); 
+      );
     } else {
-      res.status(200).json({ error: "User or password incorrect. Try again." });
+      res.status(200).json({ error: "User or password lkj incorrect. Try again." });
     }
   }
   else {
-    res.status(200).json({ error: "User or password incorrect. Try again." });
+    res.status(200).json({ error: "User or password lkjh incorrect. Try again." });
   }
 
 
