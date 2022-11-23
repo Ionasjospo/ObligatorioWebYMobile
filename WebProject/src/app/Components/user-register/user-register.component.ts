@@ -18,10 +18,10 @@ export class UserRegisterComponent implements OnInit {
   roles: string[] = ['Admin', 'Operator', 'Auditors'];
   users: User[] = [];
 
-  // this.RegisterService.getUsers();
+  
 
   public register(username: string, password: string){
-    this.RegisterService.register({username: username, password : password})
+    this.RegisterService.register({username: username, password : password}).subscribe();
   };
 
 }
