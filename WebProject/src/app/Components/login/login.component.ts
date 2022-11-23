@@ -42,14 +42,4 @@ export class LoginComponent implements OnInit {
       }
     });  
   }
-  
-
-  // /**
-  //  * newUser
-  //  */
-  // private newUser(newUser: User) {
-  //   this.users.push(newUser);
-  // }
-
-
 }
