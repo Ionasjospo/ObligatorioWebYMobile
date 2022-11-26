@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Piece } from 'src/app/Interfaces/Piece';
 import { PieceListService } from 'src/app/Services/piece-list.service';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { Windmill } from 'src/app/Interfaces/windmill';
+import { WindmillData } from 'src/app/Interfaces/windmill-data';
+import { WindmillToValidateService } from 'src/app/Services/windmill-to-validate.service';
+import { User } from 'src/app/Interfaces/User';
+import { UserListService } from 'src/app/Services/user-list.service';
 
 
 @Component({
@@ -11,22 +16,19 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 })
 export class DragAndDropComponent implements OnInit {
 
-  constructor(private pieceListService: PieceListService) { }
+  constructor(private pieceListService: PieceListService, private userListService: UserListService, private windmillToValidateService :WindmillToValidateService) { }
 
   ngOnInit(): void {
     this.start();
   }
 
-  
-  
-  
+
+
+
   pieces: Piece[] = [];
   filteredPieces: Piece[] = [];
-  
-  blades = [""];
-  body = [""];
-  base = [""];
-  
+
+
   // blades=[(this.filter("blades"))];
   todo = [this.filteredPieces];
 
@@ -57,6 +59,10 @@ export class DragAndDropComponent implements OnInit {
       }
     });
   }
+  //{id: 2, title: "hola", type: "nashe", img: "../../assets/blades.jpg", material: "mdsf", height: "goak,", resistance: "hihgh"}
+  base: Piece[] = [];
+  blades: Piece[] = [];
+  body: Piece[] = [];
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
@@ -69,8 +75,24 @@ export class DragAndDropComponent implements OnInit {
         event.currentIndex,
       );
       console.log(this.filteredPieces);
-      
+
     }
   }
+  
+
+  public addToValidate() {
+    var username = localStorage.getItem('username');
+    
+    let newWindmill: Windmill = {base: this.base[0], blades: this.blades[0], body:this.body[0], status:"pending", description: "Fdgf"}; 
+    let newWindmillData: WindmillData = {by: username as string, windmill: newWindmill};
+    
+    console.log(newWindmillData)
+
+    this.windmillToValidateService.addNewElement(newWindmillData).subscribe();
+  
+    
+  }
+
+
 }
 
