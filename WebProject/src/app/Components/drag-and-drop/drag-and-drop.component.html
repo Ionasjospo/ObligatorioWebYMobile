@@ -40,7 +40,9 @@
       [cdkDropListConnectedTo]="[catalogueList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of blades" cdkDrag>{{item}}</div>
+      <div class="example-box" *ngFor="let item of blades" cdkDrag>
+        <app-item-style [piece]="item"></app-item-style>
+      </div>
     </div>
   </div>
   <div class="example-container2">
@@ -53,7 +55,7 @@
       [cdkDropListConnectedTo]="[catalogueList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of body" cdkDrag>{{item}}</div>
+      <div class="example-box" *ngFor="let item of body" cdkDrag><app-item-style [piece]="item" ></app-item-style></div>
     </div>
   </div>
   <div class="example-container2">
@@ -66,7 +68,8 @@
       [cdkDropListConnectedTo]="[catalogueList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let item of base" cdkDrag>{{item}}</div>
+      <div class="example-box" *ngFor="let item of base" cdkDrag><app-item-style [piece]="item" ></app-item-style></div>
     </div>
   </div>
-  
+  <!-- <input type="text"> -->
+  <button type="submit" class="btn btn-primary btn-lg loginButton" (click)="addToValidate()">Send</button>
