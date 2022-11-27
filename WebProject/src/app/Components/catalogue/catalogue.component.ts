@@ -48,8 +48,8 @@ export class CatalogueComponent implements OnInit {
     
   }
 
-  public delete(){
-    this.pieceListService.deletePiece().subscribe(
-      )
+  public delete(piece: Piece): void {
+    this.allPieces = this.allPieces.filter(p => p !== piece);
+    this.pieceListService.deletePiece(piece.id).subscribe();
   }
 }

@@ -16,7 +16,7 @@ export class PieceListService {
     return this.http.get<Piece[]>('http://localhost:8090/pieces');
   }
 
-  deletePiece(): Observable<Piece[]> {
+  deletePiece(id: number): Observable<Piece[]> {
     return this.http.delete<Piece[]>('http://localhost:8090/pieces');
   }
 

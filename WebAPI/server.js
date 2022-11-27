@@ -75,14 +75,16 @@ app.get('/pieces', async (req, res) => {
   res.send(pieces);
 });
 
-// app.delete('/pieces', async (req, res) => {
-//   const mongoManager = new mdbM.mongoManager("pieces");
-//   const db = await mongoManager.connect();
+app.delete('/pieces', async (req, res) => {
+  const mongoManager = new mdbM.mongoManager("pieces");
+  const db = await mongoManager.connect();
 
-//   let pieces = await mongoManager.getOneCollection();
+  let id = req.body.id;
 
-//   res.send(pieces);
-// });
+  let pieces = await mongoManager.getPieceById(req.body.id);
+
+  console.log(pieces);
+});
 
 app.get('/windmillToValidate', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("windmillToValidate");
@@ -157,7 +159,8 @@ app.post("/login", async (req, res) => {
     const result = await bcrypt.compare(req.body.password, user[0].password);
 
     if (result) {
-      const token = await jwt.sign({ username: user.username /*, role:user[0].role */ }, SECRET);
+      const token = await jwt.sign({ username: user.username /*, role:user[0].role */ }, SECRET, {expiresIn: '12h'});
+      
       //console.log(token);
       // res.json({ token });
       res.send(
