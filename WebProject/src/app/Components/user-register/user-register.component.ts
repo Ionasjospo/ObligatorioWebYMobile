@@ -27,12 +27,21 @@ export class UserRegisterComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    this.start()
   }
 
   roles: string[] = ['Admin', 'Operator', 'Auditor'];
   users: User[] = [];
 
-  
+  public start() {
+    this.userListService.getUsers().subscribe(
+      dataUser => { 
+      this.users = dataUser;
+    })
+    console.log(this.users);
+    
+  }
+
   public model: any;
   
   public search = (text$: Observable<string>) =>
@@ -47,6 +56,32 @@ export class UserRegisterComponent implements OnInit {
 
   public register(username: string, password: string, role: string){
     this.RegisterService.register({username: username, password : password, role: role}).subscribe();
+    
+   this.click();
   };
+
+  button = 'REGISTER';
+  isLoading = false;
+  buttons = {
+    button1: {
+      name: 'Register',
+      loading: false
+    }
+  }
+
+  click() {
+    this.isLoading = true;
+    this.button = 'Processing';
+
+    setTimeout(() => {
+      this.isLoading = false;
+      this.button = 'Registered!';
+    }, 1000)
+
+    setTimeout(() => {
+      this.button = 'REGISTER';
+    }, 6000)
+    
+  }
 
 }

@@ -1,7 +1,7 @@
 <section>
 
   <div>
-    <img class="catalogueTitle" src="../assets/catalogue.png">
+    <img class="catalogueTitle" src="../assets/catalogue2.svg">
   </div>
 
   <div>
@@ -30,7 +30,23 @@
             <div *ngFor="let i of showPieces" class="col-12 col-sm-6 col-lg-4 mb-2" id={{i.id}}>
               <app-item-style [piece]="i"></app-item-style>
             </div>
-    
+            
+            <div class="input-group mb-3">
+              <input type="file" class="form-control" id="inputGroupFile02">
+              <label class="input-group-text" for="inputGroupFile02">Upload</label>
+            </div>
+            
+            <!-- <div *ngIf="fttsp else nftsp">
+              <div *ngFor="let i of pieces" class="col-12 col-sm-6 col-lg-4 mb-2" id={{i.id}}>
+                <app-item-style [piece]="i"></app-item-style>
+              </div>
+            </div>
+            <ng-template #nftsp>
+              <div *ngFor="let i of filteredPieces" class="col-12 col-sm-6 col-lg-4 mb-2" id={{i.id}}>
+                <app-item-style [piece]="i"></app-item-style>
+              </div>
+            </ng-template> -->
+
           </div>
         </div>
       </div>
