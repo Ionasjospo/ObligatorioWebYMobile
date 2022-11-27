@@ -38,7 +38,7 @@
       #bladesList="cdkDropList"
       [cdkDropListData]="blades"
       [cdkDropListConnectedTo]="[catalogueList]"
-      class="example-list"
+      class="containersToCard"
       (cdkDropListDropped)="drop($event)">
       <div class="example-box" *ngFor="let item of blades" cdkDrag>
         <app-item-style [piece]="item"></app-item-style>
@@ -53,7 +53,7 @@
       #bodyList="cdkDropList"
       [cdkDropListData]="body"
       [cdkDropListConnectedTo]="[catalogueList]"
-      class="example-list"
+      class="containersToCard"
       (cdkDropListDropped)="drop($event)">
       <div class="example-box" *ngFor="let item of body" cdkDrag><app-item-style [piece]="item" ></app-item-style></div>
     </div>
@@ -66,10 +66,18 @@
       #baseList="cdkDropList"
       [cdkDropListData]="base"
       [cdkDropListConnectedTo]="[catalogueList]"
-      class="example-list"
+      class="containersToCard"
       (cdkDropListDropped)="drop($event)">
       <div class="example-box" *ngFor="let item of base" cdkDrag><app-item-style [piece]="item" ></app-item-style></div>
     </div>
   </div>
-  <!-- <input type="text"> -->
-  <button type="submit" class="btn btn-primary btn-lg loginButton" (click)="addToValidate()">Send</button>
+
+  <div class="input-group">
+    <input type="text" #nameInput  class="inputValidate" placeholder="Name" aria-label="Name">
+    
+    <input type="text" #descriptionInput  class="inputValidate" placeholder="Description" aria-label="Description">
+
+    <button type="submit" class="btn btn-primary btn-lg" (click)="addToValidate(nameInput.value, descriptionInput.value)">Send</button>
+  </div>
+
+
