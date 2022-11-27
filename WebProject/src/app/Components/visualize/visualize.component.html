@@ -1,2 +1,19 @@
+<div class="ls">
+
+    <h1>The windmill designed by {{data.by}} was: </h1>
 
 
+    <div class="col-12 col-md-10">
+        <div class="row">
+
+            <div *ngFor="let i of piecesList" class="col-12 col-sm-6 col-lg-4 mb-2">
+                <app-item-style [piece]="i"></app-item-style>
+            </div>
+
+        </div>
+    </div>
+
+    <button class="btn btn-primary btn-lg" routerLink="/validation-table">Back</button>
+
+
+</div>
