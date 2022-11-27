@@ -23,6 +23,7 @@ import { InterceptorsService } from './Services/interceptors.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard  } from "./Services/auth/auth.guard";
 import { AuthService } from './Services/auth-service.service';
+import { VisualizeComponent } from './Components/visualize/visualize.component';
 
 
 
@@ -38,7 +39,8 @@ import { AuthService } from './Services/auth-service.service';
     ValidationTableComponent,
     DragAndDropComponent,
     OnclickPieceComponent,
-    UserRegisterComponent
+    UserRegisterComponent,
+    VisualizeComponent
 
   ],
   imports: [

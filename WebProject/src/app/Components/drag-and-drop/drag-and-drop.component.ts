@@ -80,13 +80,16 @@ export class DragAndDropComponent implements OnInit {
   }
   
 
-  public addToValidate() {
-    var username = localStorage.getItem('username');
+  public addToValidate(name:string, description:string) {
     
-    let newWindmill: Windmill = {base: this.base[0], blades: this.blades[0], body:this.body[0], status:"pending", description: "Fdgf"}; 
-    let newWindmillData: WindmillData = {by: username as string, windmill: newWindmill};
+    let newWindmill: Windmill = {base: this.base[0], blades: this.blades[0], body:this.body[0], status:"pending", description:""}; 
+    let newWindmillData: WindmillData = {by: name, windmill: newWindmill, desData: description};
     
-    console.log(newWindmillData)
+    // console.log(newWindmillData.by);
+    // console.log(newWindmillData.windmill.base);
+    // console.log(newWindmillData.windmill.blades);
+    // console.log(newWindmillData.windmill.body);
+    // console.log(newWindmillData.windmill.description);
 
     this.windmillToValidateService.addNewElement(newWindmillData).subscribe();
   

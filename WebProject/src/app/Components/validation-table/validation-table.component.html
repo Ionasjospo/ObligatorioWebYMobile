@@ -1,5 +1,5 @@
 <div class="table-responsive-lg">
-<table class="table  table-striped table-hover">
+  <table class="table  table-striped table-hover">
     <thead>
       <tr>
         <th scope="col">#id</th>
@@ -8,40 +8,31 @@
         <th scope="col">Valid</th>
       </tr>
     </thead>
-    
-    <tbody *ngFor="let windmill of toValidate">
-      
-        <tr>
-        <th scope="row">{{toValidate.indexOf(windmill)}}</th>
-        
-     
-        <!-- <td>{{windmill.user.username}}</td> -->
-        <td>{{windmill.windmill.description}}</td>
-        <td><button class="btn btn-success faiconstyle"><fa-icon [icon]="faCircleCheck"></fa-icon></button><button class="btn btn-danger faiconstyle"><fa-icon [icon]="faTrash"></fa-icon></button></td>
-        
-      </tr>
-      
-      
-      
-      <!-- <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td><button class="btn btn-success faiconstyle"><fa-icon [icon]="faCircleCheck"></fa-icon></button><button class="btn btn-danger faiconstyle"><fa-icon [icon]="faTrash"></fa-icon></button></td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td><button class="btn btn-success faiconstyle"><fa-icon [icon]="faCircleCheck"></fa-icon></button><button class="btn btn-danger faiconstyle"><fa-icon [icon]="faTrash"></fa-icon></button></td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the bird</td>
-        <td><button class="btn btn-success faiconstyle"><fa-icon [icon]="faCircleCheck"></fa-icon></button><button class="btn btn-danger faiconstyle"><fa-icon [icon]="faTrash"></fa-icon></button></td>
-      </tr> -->
-    </tbody>
-  </table>
-</div>
 
+    <tbody *ngFor="let w of toValidate">
+
+
+      <tr>
+        <th scope="row">{{toValidate.indexOf(w)}}</th>
+        <td>{{w.by}}</td>
+        <td>{{w.desData}}</td>
+        <td>
+          <button class="btn btn-dark faiconstyle" routerLink="/visualize" (click)="visualize(toValidate.indexOf(w))">
+            <fa-icon [icon]="faEye"></fa-icon>
+          </button>
+          <button class="btn btn-success faiconstyle">
+            <fa-icon [icon]="faCircleCheck"></fa-icon>
+          </button>
+          <button class="btn btn-danger faiconstyle">
+            <fa-icon [icon]="faTrash"></fa-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody> 
+  </table>
+
+  <div *ngIf="visualizeB"> 
+    <app-visualize [windmill]="toValidate[id]" ></app-visualize>
+    
+  </div>
+</div>
