@@ -19,7 +19,9 @@ export class ItemStyleComponent implements OnInit {
 
   faTrash = faTrash;
 
-  public delete(){
-    this.CatalogueComponent.delete();
+  public delete(piece: Piece){
+
+    this.CatalogueComponent.delete(piece);
+    
   }
 }

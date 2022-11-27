@@ -47,6 +47,17 @@ class mongoManager {
         var col = await db.collection(this.collection).find({}).toArray();
         return col
     }
+
+    async getPieceById(id){
+        if (this.dbString == undefined) {
+            this.dbString = process.env.MONGO_DB;
+            await this.client.db(this.dbString); 
+        }
+        const db = await this.client.db(this.dbString); 
+        var col = await db.collection(this.collection).findOne({id: id}).toArray();
+        // object.id = _id;
+        return col
+    }
     async insertElement(element)
     {
         if (this.dbString == undefined) {
