@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Piece } from 'src/app/Interfaces/Piece';
 import { WindmillData } from 'src/app/Interfaces/windmill-data';
+import { ItemStyleComponent } from '../item-style/item-style.component';
+import { WindmillVisualizeService } from 'src/app/Services/windmill-visualize.service';
 
 @Component({
   selector: 'app-visualize',
@@ -8,19 +10,28 @@ import { WindmillData } from 'src/app/Interfaces/windmill-data';
   styleUrls: ['./visualize.component.scss']
 })
 export class VisualizeComponent implements OnInit {
-  @Input() windmill?:WindmillData ;
 
-  baseW = this.windmill?.windmill.base;
-  bodyW = this.windmill?.windmill.body;
-  bladesW = this.windmill?.windmill.blades;
+  constructor(private windmillVisualizeService: WindmillVisualizeService) { }
 
-  Pieces: Piece[] = [this.bodyW as Piece, this.baseW as Piece, this.bladesW as Piece]
-  
-  constructor() { }
+  data: any
+  baseW: any;
+  bodyW: any;
+  bladesW: any;
+  piecesList: Piece[] = [];
 
   ngOnInit(): void {
-    console.log( "ACaaaaaaaa " +this.windmill)
-    console.log(this.Pieces)
+    this.data = this.windmillVisualizeService.data;
+    this.windmillVisualizeService.data = undefined; 
+    this.baseW = this.data.windmill.base;
+    this.bodyW = this.data.windmill.body;
+    this.bladesW = this.data.windmill.blades
+    this.piecesList.push(this.baseW);
+    this.piecesList.push(this.bodyW);
+    this.piecesList.push(this.bladesW);
   }
 
+ 
+
+ 
+  
 }
