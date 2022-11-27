@@ -1,28 +1,37 @@
-<section id="navbar" class="bg-light text-dark">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light container-lg">
-        <a href="https://carreras.ucu.edu.uy/index.php/informatica" target="_blank">
-             <img class="navbar-brand logoUCU" src="../../assets/Logo-UCU2.png">
-            </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse row justify-content-end bg-light" id="navbarNavAltMarkup">
-            <div class="navbar-nav col-lg-4">
-                <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'"  routerLink="/catalogue">Catalogue</a>
-                <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'" routerLink="/design">Design</a>
-                <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'"  routerLink="/validation-table">Validation</a>
-                <div *ngIf="login; else loggeOut">
-                    <a class="nav-item nav-link" routerLink="/login"><fa-icon [icon]="faSignOut"></fa-icon></a>
-                    
-                    
-                </div>
-                <ng-template #loggeOut>
-                    <a class="nav-item nav-link " routerLink="/login"><fa-icon [icon]="faUser"></fa-icon></a>
-                </ng-template>
-                <a [className]="login ? 'nav-item nav-link' : 'disabled nav-item nav-link'"  routerLink="/register"><fa-icon [icon]="faGear"></fa-icon></a>
-                
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a href="https://carreras.ucu.edu.uy/carreras/ver/carrera-en-ingenieria-en-informatica--mvd?variante=4" target="_blank">
+        <img class="navbar-brand logoUCU" src="../../assets/Logo-UCU2.png">
+       </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse justify-content-end" id="navbarColor03" [ngbCollapse]="isCollapsed">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a [className]="login ? 'nav-link' : 'disabled nav-link'"  routerLink="/catalogue">Catalogue</a>
+        </li>
+        <li class="nav-item">
+            <a [className]="login ? 'nav-link' : 'disabled nav-link'" routerLink="/design">Design</a>
+        </li>
+        <li class="nav-item">
+            <a [className]="login ? 'nav-link' : 'disabled nav-link'"  routerLink="/validation-table">Validation</a>
+        </li>
+        <li class="nav-item">
+            <div *ngIf="login; else loggeOut">
+                <a class="nav-link" routerLink="/login"><fa-icon [icon]="faSignOut"></fa-icon></a>
             </div>
-        </div>
-    </nav>
-</section>
+        </li>
+        <li class="nav-item active gear">
+            <a [className]="login ? 'nav-link' : 'disabled nav-link'"  routerLink="/register"><fa-icon [icon]="faGear"></fa-icon></a>
+        </li>
+      </ul>
+
+      <ng-template #loggeOut>
+        <a class="nav-item nav-link " routerLink="/login"><fa-icon [icon]="faUser"></fa-icon></a>
+    </ng-template>
+      
+    </div>
+  </nav>

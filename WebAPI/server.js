@@ -75,6 +75,15 @@ app.get('/pieces', async (req, res) => {
   res.send(pieces);
 });
 
+// app.delete('/pieces', async (req, res) => {
+//   const mongoManager = new mdbM.mongoManager("pieces");
+//   const db = await mongoManager.connect();
+
+//   let pieces = await mongoManager.getOneCollection();
+
+//   res.send(pieces);
+// });
+
 app.get('/windmillToValidate', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("windmillToValidate");
   const db = await mongoManager.connect();
@@ -112,13 +121,20 @@ app.post("/register", async (req, res) => {
     console.log(req.body);
     console.log("Registered!");
 
-    // } catch (error) {
-    //   res.status(400).json({ error });
-    // }
-
   }
 
 });
+
+app.get('/users', async (req, res) => {
+  const mongoManager = new mdbM.mongoManager("users");
+  const db = await mongoManager.connect();
+
+  let users = await mongoManager.getOneCollection();
+
+  res.send(users);
+});
+
+
 var actualUser;
 app.get("/actualUser", (req, res) => {
   try {
@@ -164,7 +180,9 @@ app.post("/login", async (req, res) => {
 
 });
 
-
+app.post("/upload", function (req, res) {
+  res.send("OK")
+})
 // app.post('/pieces', (req, res) => {
 //   let card = {
 //     id: uuidv4().toString(),

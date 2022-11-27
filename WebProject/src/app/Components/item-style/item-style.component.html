@@ -2,12 +2,13 @@
     <div class="card">
         <img class="card-img" src={{piece.img}} alt="Card image cap">
         <div class="card-body">
-          <h3 class="titleItem">{{piece.title}}</h3>
+          
+          <h3 class="titleItem">{{piece.title}} </h3>
           <p class="descriptionpiece">
               Type: {{piece.type}}.<br>
               Height: {{piece.height}}.<br>
               Resistance: {{piece.resistance}}.<br>
-              Material: {{piece.material}}.<br>
+              Material: {{piece.material}}.<button class="btn btn-danger faiconstyle" (click)="delete()"><fa-icon [icon]="faTrash"></fa-icon></button><br>
           </p>
         </div>
       </div>
