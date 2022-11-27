@@ -18,9 +18,6 @@ export class CatalogueComponent implements OnInit {
 
   allPieces: Piece[] = [];
   showPieces: Piece[] = [];
-  // pieceList : Piece[] = [];
-  //fttsp : boolean = true; 
-
 
   /**
      * start
@@ -30,11 +27,7 @@ export class CatalogueComponent implements OnInit {
       dataPieces => { 
       this.allPieces = dataPieces;
       this.showPieces = dataPieces;
-    })
-    // if (this.fttsp) {
-    //   this.pieceList = this.pieces; 
-    // }
-    
+    })    
   }
   /**
    * filter
@@ -49,7 +42,6 @@ export class CatalogueComponent implements OnInit {
       if (filter == 'all') {
         this.showPieces = this.allPieces; 
       }
-      //this.allPieces = this.showPieces;
     });
     
   }

@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
       
       this.validLogin = res.user !== undefined;
       if(this.validLogin) {
-        localStorage.setItem('username', res.user.username)
         this.route.navigate(["/home"]);
         this.loginService.logIn();
         localStorage.setItem('jwt', res.jwtToken);

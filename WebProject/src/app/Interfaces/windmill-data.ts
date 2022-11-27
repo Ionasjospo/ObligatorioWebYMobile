@@ -3,7 +3,8 @@ import { Windmill } from "./windmill";
 
 export interface WindmillData {
     by: string,
-    windmill: Windmill
+    windmill: Windmill,
+    desData: string
 }
 
 

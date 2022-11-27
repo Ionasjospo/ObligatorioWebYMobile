@@ -84,11 +84,11 @@ app.get('/windmillToValidate', async (req, res) => {
   res.send(windmills);
 });
 
-app.post("addWindmill", async (req, res) => {
+app.post("/addWindmill", async (req, res) => {
     const mongoManager = new mdbM.mongoManager("windmillToValidate");
     const db = await mongoManager.connect();
-    console.log("dcfdsf"+req.headers)
-    await mongoManager.insertElement(req.headers);
+    console.log(req.body)
+    await mongoManager.insertElement(req.body);
     res.json("ok");
 
 });

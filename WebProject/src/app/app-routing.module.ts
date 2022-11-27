@@ -7,6 +7,7 @@ import { ValidationTableComponent } from './Components/validation-table/validati
 import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.component';
 import { UserRegisterComponent } from './Components/user-register/user-register.component';
 import { AuthGuard  } from "./Services/auth/auth.guard";
+import { VisualizeComponent } from './Components/visualize/visualize.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent  },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'validation-table', component: ValidationTableComponent},
   {path: 'design', component: DragAndDropComponent},
   {path: 'register', component: UserRegisterComponent},
+  {path: 'visualize', component: VisualizeComponent}
 
 ];
 
