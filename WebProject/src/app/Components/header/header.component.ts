@@ -15,6 +15,7 @@ export class HeaderComponent implements OnInit {
   
   constructor(private loginService: LoginService) { }
 
+  public isCollapsed = true;
   faGear = faGear;
   faSignOut = faSignOut;
   faUser = faUser;
@@ -28,7 +29,6 @@ export class HeaderComponent implements OnInit {
     .subscribe(login => this.login = login);
 
   }
- 
 
 
 }

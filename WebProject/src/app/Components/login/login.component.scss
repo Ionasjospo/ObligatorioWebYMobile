@@ -8,9 +8,12 @@ background: #eee;
 .h-custom {
 height: calc(100% - 73px);
 }
+
+
+
 @media (max-width: 450px) {
 .h-custom {
-height: 100%;
+height: auto;
 }
 }
 
@@ -19,4 +22,6 @@ height: 100%;
     padding-left: 2.5rem; 
     padding-right: 2.5rem;
 }
+
+
 

@@ -16,6 +16,8 @@ export class CatalogueComponent implements OnInit {
     this.start();
   }
 
+  
+
   allPieces: Piece[] = [];
   showPieces: Piece[] = [];
   // pieceList : Piece[] = [];
@@ -52,5 +54,10 @@ export class CatalogueComponent implements OnInit {
       //this.allPieces = this.showPieces;
     });
     
+  }
+
+  public delete(){
+    this.pieceListService.deletePiece().subscribe(
+      )
   }
 }
