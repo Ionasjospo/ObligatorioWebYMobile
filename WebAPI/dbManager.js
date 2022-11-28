@@ -48,16 +48,16 @@ class mongoManager {
         return col
     }
 
-    async getPieceById(id){
+    async deletePiece(element){
         if (this.dbString == undefined) {
             this.dbString = process.env.MONGO_DB;
             await this.client.db(this.dbString); 
         }
         const db = await this.client.db(this.dbString); 
-        var col = await db.collection(this.collection).findOne({id: id}).toArray();
-        // object.id = _id;
+        var col = await db.collection(this.collection).findOneAndDelete(element);
         return col
     }
+
     async insertElement(element)
     {
         if (this.dbString == undefined) {

@@ -49,7 +49,7 @@ export class DragAndDropComponent implements OnInit {
     
   }
   // blades=[(this.filter("blades"))];
-  todo = [this.filteredPieces];
+  todo = [this.showPieces];
 
   /**
      * start
@@ -57,6 +57,7 @@ export class DragAndDropComponent implements OnInit {
   public start() {
     this.pieceListService.getPieces().subscribe(
       dataPieces => {
+
         this.pieces = dataPieces;
         this.filteredPieces = dataPieces;
         //alert(this.filteredPieces)
@@ -68,14 +69,14 @@ export class DragAndDropComponent implements OnInit {
     * filter
     */
   public filter(filter: string) {
-    this.filteredPieces = [];
-    this.pieces.forEach(element => {
-      let piece = element.type.toLowerCase();
-      if (piece == filter) {
-        this.filteredPieces.push(element);
+    this.showPieces = [];
+    this.allPieces.forEach(element => {
+      // let piece = element.type.toLowerCase();
+      if (element.type.toLowerCase() == filter) {
+        this.showPieces.push(element);
       }
-      else {
-        this.filteredPieces = this.pieces;
+      else if (filter == 'all'){
+        this.showPieces = this.allPieces;
       }
     });
   }
@@ -86,7 +87,7 @@ export class DragAndDropComponent implements OnInit {
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(this.filteredPieces, event.previousIndex, event.currentIndex);
+      moveItemInArray(this.showPieces, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
         this.filteredPieces,
@@ -94,6 +95,7 @@ export class DragAndDropComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+
     }
   }
   

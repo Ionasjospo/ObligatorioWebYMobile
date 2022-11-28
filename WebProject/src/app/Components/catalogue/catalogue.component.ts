@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Piece } from 'src/app/Interfaces/Piece';
 import { PieceListService } from 'src/app/Services/piece-list.service';
+import { LoginComponent } from '../login/login.component';
 
 
 @Component({
@@ -47,8 +48,9 @@ export class CatalogueComponent implements OnInit {
     });
   }
 
-  public delete(piece: Piece): void {
-    this.allPieces = this.allPieces.filter(p => p !== piece);
-    this.pieceListService.deletePiece(piece.id).subscribe();
+  public delete(piece: Piece) {
+    
+    this.pieceListService.deletePiece(piece).subscribe();
+    
   }
 }
