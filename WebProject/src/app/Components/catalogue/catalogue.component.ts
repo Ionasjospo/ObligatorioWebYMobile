@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Piece } from 'src/app/Interfaces/Piece';
 import { PieceListService } from 'src/app/Services/piece-list.service';
 import { LoginComponent } from '../login/login.component';
@@ -11,9 +11,13 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./catalogue.component.scss']
 })
 export class CatalogueComponent implements OnInit {
+
   closeResult = '';
   private file?: File;
+  @Output() pieceDeletedEvent = new EventEmitter<Piece>()
+  
   constructor(private pieceListService: PieceListService, private modalService: NgbModal) { }
+
 
   ngOnInit(): void {
     this.start();
@@ -94,6 +98,7 @@ export class CatalogueComponent implements OnInit {
     });
   }
 
+
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -102,6 +107,12 @@ export class CatalogueComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+
+  public deletePiece(piece: Piece){
+    this.pieceDeletedEvent.emit(piece);
+    let pieceIndex = this.showPieces.indexOf(piece);
+    this.showPieces.splice(pieceIndex, 1)
+
   }
 }
 

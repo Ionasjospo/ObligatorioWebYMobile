@@ -60,8 +60,10 @@
         <div class="col-12 col-md-10">
           <div class="row">
 
-            <div *ngFor="let i of showPieces" class="col-12 col-sm-6 col-lg-4 mb-2">
-              <app-item-style [piece]="i" [delBtn]="true"></app-item-style>
+
+            <div *ngFor="let i of showPieces" class="col-12 col-sm-6 col-lg-4 mb-2" id={{i.id}}>
+              <app-item-style [piece]="i" [delBtn]="true" (pieceDeletedEvent)="deletePiece(i)"></app-item-style>
+
             </div>
 
             
