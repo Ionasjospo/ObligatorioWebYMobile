@@ -46,7 +46,6 @@ export class CatalogueComponent implements OnInit {
         this.showPieces = this.allPieces; 
       }
     });
-    
   }
 
   public delete(piece: Piece) {

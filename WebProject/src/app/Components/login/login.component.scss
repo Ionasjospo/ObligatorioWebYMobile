@@ -9,7 +9,9 @@ background: #eee;
 height: calc(100% - 73px);
 }
 
-
+.logo{
+    width: 400px;
+}
 
 @media (max-width: 450px) {
 .h-custom {
@@ -23,5 +25,11 @@ height: auto;
     padding-right: 2.5rem;
 }
 
+.section{
+  margin-top: -150px;  
+}
 
+.spinner-login{
+    margin-top: 15px;
+}
 

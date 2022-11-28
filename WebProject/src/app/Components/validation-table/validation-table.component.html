@@ -1,5 +1,6 @@
 <div class="table-responsive-lg">
-  <table class="table  table-striped table-hover">
+  <h3 class="display-4">To validate Desings</h3>
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th scope="col">#id</th>
@@ -14,9 +15,9 @@
         <td>{{w.by}}</td>
         <td>{{w.desData}}</td>
         <td>
-          <button class="btn btn-dark faiconstyle" (click)="goToVisualize(w)">
+          <button class="btn btn-dark faiconstyle" (click)="goToVisualize(w)"> 
             <fa-icon [icon]="faEye"></fa-icon>
-
+<!-- agregar para que cuando pasemos por arriba al botton diga que hace -->
           </button>
           <button class="btn btn-success faiconstyle" (click)="validateWindmill(w)">
             <fa-icon [icon]="faCircleCheck"></fa-icon>
@@ -33,7 +34,8 @@
 
 
 <div class="table-responsive-lg doneList">
-  <table class="table  table-striped table-hover">
+  <h3 class="display-4">Valid Desings</h3>
+  <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th scope="col">#id</th>
@@ -43,12 +45,32 @@
       </tr>
     </thead>
 
-    <tbody *ngFor="let w of toValidate">
-
-    <tbody *ngFor="let w of done">
-      <th scope="row">{{done.indexOf(w)}}</th>
+    <tbody *ngFor="let w of valids">
+      <th scope="row">{{valids.indexOf(w)}}</th>
       <td>{{w.by}}</td>
       <td>{{w.desData}}</td>
       <td>{{w.windmill.status}}</td>
     </tbody>
   </table>
+</div>
+
+<div class="table-responsive-lg invalidList">
+  <h3 class="display-4">Invalid Desings</h3>
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#id</th>
+        <th scope="col">By</th>
+        <th scope="col">Description</th>
+        <th scope="col">Validate</th>
+      </tr>
+    </thead>
+
+    <tbody *ngFor="let w of invalids">
+      <th scope="row">{{invalids.indexOf(w)}}</th>
+      <td>{{w.by}}</td>
+      <td>{{w.desData}}</td>
+      <td>{{w.windmill.status}}</td>
+    </tbody>
+  </table>
+</div>

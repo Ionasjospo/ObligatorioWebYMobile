@@ -12,12 +12,32 @@ export class WindmillToValidateService {
   constructor(private http: HttpClient) { }
   
   getWindmills(): Observable<WindmillData[]> {
-    return this.http.get<WindmillData[]>('http://localhost:8090/windmillToValidate');
+    return this.http.get<WindmillData[]>('http://localhost:8090/getWindmillToValidate');
+  }
+  getValidWindmills(): Observable<WindmillData[]> {
+    return this.http.get<WindmillData[]>('http://localhost:8090/getValidWindmills');
+  }
+  getInvalidWindmills(): Observable<WindmillData[]> {
+    return this.http.get<WindmillData[]>('http://localhost:8090/getInvalidWindmills');
   }
 
-  addNewElement(wdm : WindmillData){
-    //alert("llegue a service de windmill ")
+
+  addNewWindmillToValidate(wdm : WindmillData){
     return this.http.post<WindmillData>('http://localhost:8090/addWindmill', wdm)
   } 
+  
+  validateWindmill(wdm : WindmillData){   
+    return this.http.post<WindmillData>('http://localhost:8090/ValidateWindmill', wdm).subscribe()
+  } 
+  rejectWindmill(wdm : WindmillData){
+    return this.http.post<WindmillData>('http://localhost:8090/rejectWindmill', wdm).subscribe()
+  }
+
+  alreadyValidated(wdm:WindmillData){
+    return this.http.post<WindmillData>('http://localhost:8090/alreadyValidated', wdm).subscribe()
+  }
+
+  
+
 
 }

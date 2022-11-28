@@ -11,12 +11,13 @@ import { CatalogueComponent } from '../catalogue/catalogue.component';
 })
 export class ItemStyleComponent implements OnInit {
   @Input() piece?: Piece;
+  @Input() delBtn?: boolean;
   constructor(private CatalogueComponent: CatalogueComponent) { }
-
-  ngOnInit(): void {
   
+ 
+  
+  ngOnInit(): void {
   }
-
   faTrash = faTrash;
 
   public delete(piece: Piece){
