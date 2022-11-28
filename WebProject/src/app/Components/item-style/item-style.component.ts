@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { Piece } from 'src/app/Interfaces/Piece';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { CatalogueComponent } from '../catalogue/catalogue.component';
@@ -14,6 +14,10 @@ export class ItemStyleComponent implements OnInit {
   @Input() piece?: Piece;
 
   @Input() delBtn?: boolean;
+
+
+  @Output() pieceDeletedEvent = new EventEmitter<Piece>()
+
   constructor(private pieceListService: PieceListService) { }
 
   
@@ -26,6 +30,7 @@ export class ItemStyleComponent implements OnInit {
   public delete(piece: Piece){
     
     this.pieceListService.deletePiece(piece).subscribe();
+    this.pieceDeletedEvent.emit(piece);
     
   }
 }

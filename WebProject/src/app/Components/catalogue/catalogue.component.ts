@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { Piece } from 'src/app/Interfaces/Piece';
 import { PieceListService } from 'src/app/Services/piece-list.service';
 import { LoginComponent } from '../login/login.component';
@@ -10,6 +10,8 @@ import { LoginComponent } from '../login/login.component';
   styleUrls: ['./catalogue.component.scss']
 })
 export class CatalogueComponent implements OnInit {
+
+  @Output() pieceDeletedEvent = new EventEmitter<Piece>()
 
   constructor(private pieceListService: PieceListService) { }
 
@@ -46,5 +48,13 @@ export class CatalogueComponent implements OnInit {
         this.showPieces = this.allPieces; 
       }
     });
+  }
+
+
+  public deletePiece(piece: Piece){
+    this.pieceDeletedEvent.emit(piece);
+    let pieceIndex = this.showPieces.indexOf(piece);
+    this.showPieces.splice(pieceIndex, 1)
+    alert("no tengo plata")
   }
 }

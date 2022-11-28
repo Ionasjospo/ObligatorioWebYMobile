@@ -44,7 +44,6 @@ import { VisualizeComponent } from './Components/visualize/visualize.component';
 
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
     NgbModule,
     FormsModule,
