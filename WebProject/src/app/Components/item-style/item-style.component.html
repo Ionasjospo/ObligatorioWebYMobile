@@ -1,18 +1,20 @@
 <div *ngIf="piece">
-    <div class="card">
-        <img class="card-img" src={{piece.img}} alt="Card image cap">
-        <div class="card-body">
-          
-          <h3 class="titleItem">{{piece.title}} </h3>
-          <p class="descriptionpiece">
-              Type: {{piece.type}}.<br>
-              Height: {{piece.height}}.<br>
-              Resistance: {{piece.resistance}}.<br>
-              Material: {{piece.material}}.<br>
-          </p>
-          <div *ngIf="delBtn">
-            <button class="btn btn-danger faiconstyle delButton" (click)="delete(piece)"><fa-icon [icon]="faTrash"></fa-icon></button>
-          </div>  
-        </div>
+  <div class="card">
+    <img class="card-img" [src]="imageSource" alt="Image Source">
+    <div class="card-body">
+
+      <h3 class="titleItem">{{piece.title}} </h3>
+      <p class="descriptionpiece">
+        Type: {{piece.type}}.<br>
+        Height: {{piece.height}}.<br>
+        Resistance: {{piece.resistance}}.<br>
+        Material: {{piece.material}}.<br>
+      </p>
+      <div *ngIf="delBtn">
+        <button class="btn btn-danger faiconstyle delButton" (click)="delete(piece)">
+          <fa-icon [icon]="faTrash"></fa-icon>
+        </button>
       </div>
+    </div>
+  </div>
 </div>

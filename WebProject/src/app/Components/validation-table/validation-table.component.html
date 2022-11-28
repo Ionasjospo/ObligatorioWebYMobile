@@ -50,6 +50,10 @@
       <td>{{w.by}}</td>
       <td>{{w.desData}}</td>
       <td>{{w.windmill.status}}</td>
+      <td><button class="btn btn-dark faiconstyle" (click)="goToVisualize(w)"> 
+        <fa-icon [icon]="faEye"></fa-icon>
+<!-- agregar para que cuando pasemos por arriba al botton diga que hace -->
+      </button></td>
     </tbody>
   </table>
 </div>
@@ -71,6 +75,10 @@
       <td>{{w.by}}</td>
       <td>{{w.desData}}</td>
       <td>{{w.windmill.status}}</td>
+      <td><button class="btn btn-dark faiconstyle" (click)="goToVisualize(w)"> 
+        <fa-icon [icon]="faEye"></fa-icon>
+<!-- agregar para que cuando pasemos por arriba al botton diga que hace -->
+      </button></td>
     </tbody>
   </table>
 </div>

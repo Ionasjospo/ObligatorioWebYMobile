@@ -5,7 +5,7 @@ const cors = require('cors');
 const _ = require('lodash');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
-const { indexOf, findIndex } = require('lodash');
+const { indexOf, findIndex, extend } = require('lodash');
 const { count } = require('console');
 const mdbM = require('./dbManager.js');
 require("dotenv").config()
@@ -31,9 +31,11 @@ var corsOptions = { //cross domain
   optionsSuccessStatus: 200,
   methods: "GET, POST, PUT, DELETE"
 }
-app.use(express.json())
+
 app.use(morgan("tiny"))
 app.use(cors(corsOptions));
+app.use(express.json({limit: '25mb'}));
+app.use(express.urlencoded({limit: '25mb'}));
 
 
 app.use(function (req, res, next) {
@@ -83,8 +85,6 @@ app.post('/deletePieces', async (req, res) => {
   console.log(req.body);
   var objectId = new ObjectID(req.body._id);
   let piece = await mongoManager.deletePiece({"_id": objectId});
-  console.log("acá estas en la api: ");
-
 });
 
 app.post('/validatedWindmills', async(req, res)  =>{
@@ -99,6 +99,7 @@ app.post('/newPiece', async(req, res)  =>{
   const mongoManager = new mdbM.mongoManager("pieces");
   const db = await mongoManager.connect();
   await mongoManager.insertElement(req.body);
+  console.log("quedo");
   res.json("ok");
 })
 
