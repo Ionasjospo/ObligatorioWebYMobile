@@ -49,7 +49,7 @@ export class DragAndDropComponent implements OnInit {
     
   }
   // blades=[(this.filter("blades"))];
-  todo = [this.showPieces];
+  todo = [this.filteredPieces];
 
   /**
      * start
@@ -69,14 +69,14 @@ export class DragAndDropComponent implements OnInit {
     * filter
     */
   public filter(filter: string) {
-    this.showPieces = [];
-    this.allPieces.forEach(element => {
+    this.filteredPieces = [];
+    this.pieces.forEach(element => {
       // let piece = element.type.toLowerCase();
       if (element.type.toLowerCase() == filter) {
-        this.showPieces.push(element);
+        this.filteredPieces.push(element);
       }
       else if (filter == 'all'){
-        this.showPieces = this.allPieces;
+        this.filteredPieces = this.pieces;
       }
     });
   }
@@ -87,7 +87,7 @@ export class DragAndDropComponent implements OnInit {
 
   drop(event: CdkDragDrop<any[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(this.showPieces, event.previousIndex, event.currentIndex);
+      moveItemInArray(this.filteredPieces, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
         this.filteredPieces,
