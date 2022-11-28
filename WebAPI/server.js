@@ -75,15 +75,14 @@ app.get('/pieces', async (req, res) => {
   res.send(pieces);
 });
 
-app.delete('/pieces', async (req, res) => {
+app.post('/deletePieces', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("pieces");
   const db = await mongoManager.connect();
+  
 
-  let id = req.body.id;
+  let pieces = await mongoManager.deletePiece(req.body);
+  console.log("acá estas en la api");
 
-  let pieces = await mongoManager.getPieceById(req.body.id);
-
-  console.log(pieces);
 });
 
 app.get('/windmillToValidate', async (req, res) => {
