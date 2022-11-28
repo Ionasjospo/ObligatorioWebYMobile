@@ -10,14 +10,47 @@
         <div class="col-12 col-md-2">
 
           <div ngbDropdown class="d-inline-block">
-            <button type="button" class="btn btn-outline-primary filterByType" id="dropdownBasic1"
-              ngbDropdownToggle>Filter by type</button>
+            <button type="button" class="btn btn-primary filterByType" id="dropdownBasic1" ngbDropdownToggle>Filter by
+              type</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button ngbDropdownItem (click)="filter('blades')">Blades</button>
               <button ngbDropdownItem (click)="filter('body')">Body</button>
               <button ngbDropdownItem (click)="filter('base')">Base</button>
               <button ngbDropdownItem (click)="filter('all')">All</button>
             </div>
+
+            <ng-template #content let-modal>
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Publish new piece</h4>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+              </div>
+
+              <div class="modal-body">
+                <form>
+                  <h6>Title: </h6> <input type="text" #title> <br>
+                  <h6>Type: </h6> <input type="text" #type> <br>
+                  <h6>Img: </h6> <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="inputGroupFile02" (change)="onChange($event)">
+                    <label class="input-group-text" for="inputGroupFile02"></label>
+                  </div> <br>
+                  <h6>Material: </h6> <input type="text" #material> <br>
+                  <h6>Height: </h6> <input type="text" #height> <br>
+                  <h6>Resistance: </h6> <input type="text" #resistance> <br>
+                  
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')" (click)="newPiece(title.value, type.value, material.value, height.value, resistance.value)">Publish</button>
+              </div>
+            </ng-template>
+            
+            <button class="btn btn-lg btn-primary btnModal" (click)="open(content)">New Piece</button>
+            
+            <hr />
+            
+            <pre>{{ closeResult }}</pre>
+
+
           </div>
 
 
@@ -27,25 +60,11 @@
         <div class="col-12 col-md-10">
           <div class="row">
 
-            <div *ngFor="let i of showPieces" class="col-12 col-sm-6 col-lg-4 mb-2" id={{i.id}}>
+            <div *ngFor="let i of showPieces" class="col-12 col-sm-6 col-lg-4 mb-2">
               <app-item-style [piece]="i" [delBtn]="true"></app-item-style>
             </div>
+
             
-            <div class="input-group mb-3">
-              <input type="file" class="form-control" id="inputGroupFile02">
-              <label class="input-group-text" for="inputGroupFile02">Upload</label>
-            </div>
-            
-            <!-- <div *ngIf="fttsp else nftsp">
-              <div *ngFor="let i of pieces" class="col-12 col-sm-6 col-lg-4 mb-2" id={{i.id}}>
-                <app-item-style [piece]="i"></app-item-style>
-              </div>
-            </div>
-            <ng-template #nftsp>
-              <div *ngFor="let i of filteredPieces" class="col-12 col-sm-6 col-lg-4 mb-2" id={{i.id}}>
-                <app-item-style [piece]="i"></app-item-style>
-              </div>
-            </ng-template> -->
 
           </div>
         </div>
