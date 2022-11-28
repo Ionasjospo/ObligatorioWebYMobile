@@ -16,15 +16,8 @@ export class PieceListService {
     return this.http.get<Piece[]>('http://localhost:8090/pieces');
   }
 
-  deletePiece(id: number): Observable<Piece[]> {
-    return this.http.delete<Piece[]>('http://localhost:8090/pieces');
+  deletePiece(piece: Piece){
+    return this.http.post('http://localhost:8090/deletePieces', piece);
   }
-
-  // private transform(){
-  //   this.piecesList.forEach(element => {
-      
-  //   });
-  // }
-
 
 }

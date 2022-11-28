@@ -23,7 +23,7 @@
       [cdkDropListConnectedTo]="[bladesList, bodyList, baseList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let i of filteredPieces" cdkDrag id={{i.id}}>
+      <div class="example-box" *ngFor="let i of showPieces" cdkDrag id={{i.id}}>
         <app-item-style [piece]="i" ></app-item-style>
         </div>
     </div>
