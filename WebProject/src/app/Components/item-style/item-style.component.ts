@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Piece } from 'src/app/Interfaces/Piece';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { CatalogueComponent } from '../catalogue/catalogue.component';
+import { PieceListService } from 'src/app/Services/piece-list.service';
 
 
 @Component({
@@ -11,8 +12,10 @@ import { CatalogueComponent } from '../catalogue/catalogue.component';
 })
 export class ItemStyleComponent implements OnInit {
   @Input() piece?: Piece;
+
   @Input() delBtn?: boolean;
-  constructor(private CatalogueComponent: CatalogueComponent) { }
+  constructor(private pieceListService: PieceListService) { }
+
   
  
   
@@ -21,8 +24,8 @@ export class ItemStyleComponent implements OnInit {
   faTrash = faTrash;
 
   public delete(piece: Piece){
-
-    this.CatalogueComponent.delete(piece);
+    
+    this.pieceListService.deletePiece(piece).subscribe();
     
   }
 }

@@ -45,13 +45,17 @@ export class ValidationTableComponent implements OnInit {
   validateWindmill(wnd: WindmillData) {
     wnd.windmill.status = "Valid"
     this.windmillToValidateService.validateWindmill(wnd);
-    this.windmillToValidateService.alreadyValidated(wnd);
   }
 
   rejectWindmill(wnd: WindmillData) {
     wnd.windmill.status = "Invalid"
-    this.windmillToValidateService.rejectWindmill(wnd);
-    this.windmillToValidateService.alreadyValidated(wnd);
+    this.windmillToValidateService.rejectWindmill(wnd).subscribe((res)=>{
+      this.start();
+    }
+
+    );
+    
+    
   }
 
 

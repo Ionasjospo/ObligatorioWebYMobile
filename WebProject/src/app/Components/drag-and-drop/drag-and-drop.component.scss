@@ -6,14 +6,16 @@
   display: inline-block;
   vertical-align: top;
   
+  
 }
 
 .contairners {
-  width: 320px;
+  width: 250px;
   height: 400px;
   margin: 38px 25px 25px 0;
   display: inline-block;
   vertical-align: top;
+  position: relative;
 }
 
 .example-list {
@@ -25,6 +27,7 @@
   overflow: hidden;
   display: block;
   overflow: scroll;
+  position: relative;
 }
 
 .containersToCard {
@@ -35,6 +38,7 @@
   border-radius: 4px;
   overflow: hidden;
   display: block;
+  position: relative;
 }
 
 .example-box {
@@ -77,9 +81,9 @@
 }
 
 .input-group{
-  position: absolute;
-  margin-top: -300px;
-  margin-left: 380px;
+  position: relative;
+  top: -80px;
+  left: 380px;
 }
 
 .inputValidate{

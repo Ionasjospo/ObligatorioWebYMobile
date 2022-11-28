@@ -56,7 +56,7 @@ import { VisualizeComponent } from './Components/visualize/visualize.component';
     HttpClientModule
   ],
 
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorsService, multi: true },[AuthService, AuthGuard], CatalogueComponent],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorsService, multi: true },[AuthService, AuthGuard]],
 
   bootstrap: [AppComponent]
 })
