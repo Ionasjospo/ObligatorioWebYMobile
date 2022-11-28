@@ -47,10 +47,4 @@ export class CatalogueComponent implements OnInit {
       }
     });
   }
-
-  public delete(piece: Piece) {
-    
-    this.pieceListService.deletePiece(piece).subscribe();
-    
-  }
 }

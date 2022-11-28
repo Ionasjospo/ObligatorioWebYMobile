@@ -13,6 +13,7 @@ const morgan = require("morgan")
 const { log } = require("mercedlogger")
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const ObjectID = require('mongodb').ObjectId;
 
 
 const { SECRET = "secret" } = process.env;
@@ -79,9 +80,10 @@ app.post('/deletePieces', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("pieces");
   const db = await mongoManager.connect();
   
-
-  let pieces = await mongoManager.deletePiece(req.body);
-  console.log("acá estas en la api");
+  console.log(req.body);
+  var objectId = new ObjectID(req.body._id);
+  let piece = await mongoManager.deletePiece({"_id": objectId});
+  console.log("acá estas en la api: ");
 
 });
 
