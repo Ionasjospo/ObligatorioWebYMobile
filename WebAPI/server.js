@@ -86,8 +86,33 @@ app.delete('/pieces', async (req, res) => {
   console.log(pieces);
 });
 
-app.get('/windmillToValidate', async (req, res) => {
+app.post('/validatedWindmills', async(req, res)  =>{
+  const mongoManager = new mdbM.mongoManager("validatedWindmills");
+  const db = await mongoManager.connect();
+  await mongoManager.insertElement(req.body);
+  res.json("ok");
+})
+
+
+app.get('/getWindmillToValidate', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("windmillToValidate");
+  const db = await mongoManager.connect();
+  let windmills = await mongoManager.getOneCollection();
+
+  res.send(windmills);
+});
+
+
+app.get('/getValidWindmills', async (req, res) => {
+  const mongoManager = new mdbM.mongoManager("validWindmills");
+  const db = await mongoManager.connect();
+  let windmills = await mongoManager.getOneCollection();
+
+  res.send(windmills);
+});
+
+app.get('/getInvalidWindmills', async (req, res) => {
+  const mongoManager = new mdbM.mongoManager("invalidWindmills");
   const db = await mongoManager.connect();
 
   let windmills = await mongoManager.getOneCollection();
@@ -98,10 +123,30 @@ app.get('/windmillToValidate', async (req, res) => {
 app.post("/addWindmill", async (req, res) => {
     const mongoManager = new mdbM.mongoManager("windmillToValidate");
     const db = await mongoManager.connect();
-    console.log(req.body)
     await mongoManager.insertElement(req.body);
     res.json("ok");
+});
 
+
+app.post("/alreadyValidated", async (req, res) => {
+  const mongoManager = new mdbM.mongoManager("windmillToValidate");
+  const db = await mongoManager.connect();
+  await mongoManager.deleteElement(req.body);
+ 
+  res.redirect("/validation-table")
+});
+app.post("/ValidateWindmill", async (req, res) => {
+  const mongoManager = new mdbM.mongoManager("validWindmills");
+  const db = await mongoManager.connect();
+  await mongoManager.insertElement(req.body);
+  res.json("ok");
+});
+
+app.post("/rejectWindmill", async (req, res) => {
+  const mongoManager = new mdbM.mongoManager("invalidWindmills");
+  const db = await mongoManager.connect();
+  await mongoManager.insertElement(req.body);
+  res.json("ok");
 });
 
 app.post("/register", async (req, res) => {
@@ -137,23 +182,12 @@ app.get('/users', async (req, res) => {
 });
 
 
-var actualUser;
-app.get("/actualUser", (req, res) => {
-  try {
-    res.send(actualUser);
-  } catch (error) {
-    res.status(200).json({ error: "Undefined User" });
-  }
-
-})
-
 app.post("/login", async (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
   const mongoManager = new mdbM.mongoManager("users");
   const db = await mongoManager.connect();
   let user = await mongoManager.findCollectionAndElement("username", username);
-  actualUser = user;
   if (undefined || user.length != 0) {
 
     const result = await bcrypt.compare(req.body.password, user[0].password);

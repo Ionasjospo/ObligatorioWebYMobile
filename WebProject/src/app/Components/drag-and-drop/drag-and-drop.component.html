@@ -30,7 +30,7 @@
     
   </div>
   
-  <div class="example-container2">
+  <div class="contairners">
     <h2>Blades</h2>
   
     <div
@@ -45,7 +45,7 @@
       </div>
     </div>
   </div>
-  <div class="example-container2">
+  <div class="contairners">
     <h2>Body</h2>
   
     <div
@@ -58,7 +58,7 @@
       <div class="example-box" *ngFor="let item of body" cdkDrag><app-item-style [piece]="item" ></app-item-style></div>
     </div>
   </div>
-  <div class="example-container2">
+  <div class="contairners">
     <h2>Base</h2>
   
     <div
@@ -73,11 +73,9 @@
   </div>
 
   <div class="input-group">
-    <input type="text" #nameInput  class="inputValidate" placeholder="Name" aria-label="Name">
-    
+    <input type="text" #nameInput  class="inputValidate" placeholder="Name" aria-label="Name">   
     <input type="text" #descriptionInput  class="inputValidate" placeholder="Description" aria-label="Description">
-
-    <button type="submit" class="btn btn-primary btn-lg" (click)="addToValidate(nameInput.value, descriptionInput.value)">Send</button>
+    <button type="submit" class="btn btn-primary btn-lg" [disabled]="isLoading" (click)="addToValidate(nameInput.value, descriptionInput.value)"><i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-check': !isLoading}"></i>{{button}}</button>
   </div>
 
 

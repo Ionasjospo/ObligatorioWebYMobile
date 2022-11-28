@@ -19,34 +19,39 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 })
 export class ValidationTableComponent implements OnInit {
 
-  constructor(private windmillToValidateService: WindmillToValidateService, private windmillVisualizeService : WindmillVisualizeService, private router: Router ) { }
+  constructor(private windmillToValidateService: WindmillToValidateService, private windmillVisualizeService: WindmillVisualizeService, private router: Router) { }
 
 
   toValidate: WindmillData[] = [];
 
-  done: WindmillData[] = [];
+  valids: WindmillData[] = [];
+  invalids: WindmillData[] = [];
+
 
   faTrash = faTrash;
   faEye = faEye;
   faCircleCheck = faCircleCheck;
+
   ngOnInit(): void {
     this.start()
   }
-  
+
 
   goToVisualize(wnd: WindmillData): void {
-       this.windmillVisualizeService.data = wnd ;
-       this.router.navigate(['/visualize']);
-   }
+    this.windmillVisualizeService.data = wnd;
+    this.router.navigate(['/visualize']);
+  }
 
-   validateWindmill(wnd:WindmillData){
+  validateWindmill(wnd: WindmillData) {
     wnd.windmill.status = "Valid"
-    this.done.push(wnd);
-   }
+    this.windmillToValidateService.validateWindmill(wnd);
+    this.windmillToValidateService.alreadyValidated(wnd);
+  }
 
-   rejectWindmill(wnd:WindmillData){
+  rejectWindmill(wnd: WindmillData) {
     wnd.windmill.status = "Invalid"
-    this.done.push(wnd);
+    this.windmillToValidateService.rejectWindmill(wnd);
+    this.windmillToValidateService.alreadyValidated(wnd);
   }
 
 
@@ -59,9 +64,14 @@ export class ValidationTableComponent implements OnInit {
       dataWindmills => {
         this.toValidate = dataWindmills;
       })
+     
+    this.windmillToValidateService.getValidWindmills().subscribe(
+      validWindmills => {
+        this.valids = validWindmills;
+      })
+      this.windmillToValidateService.getInvalidWindmills().subscribe(
+        invalidWindmills => {
+          this.invalids = invalidWindmills;
+        })
   }
 }
-
-
-
-

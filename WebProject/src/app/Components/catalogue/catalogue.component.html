@@ -28,7 +28,7 @@
           <div class="row">
 
             <div *ngFor="let i of showPieces" class="col-12 col-sm-6 col-lg-4 mb-2" id={{i.id}}>
-              <app-item-style [piece]="i"></app-item-style>
+              <app-item-style [piece]="i" [delBtn]="true"></app-item-style>
             </div>
             
             <div class="input-group mb-3">

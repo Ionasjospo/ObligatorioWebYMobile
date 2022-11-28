@@ -22,13 +22,32 @@ export class DragAndDropComponent implements OnInit {
     this.start();
   }
 
-
-
-
   pieces: Piece[] = [];
   filteredPieces: Piece[] = [];
 
+  button = 'SEND';
+  isLoading = false;
+  buttons = {
+    button1: {
+      name: 'Send',
+      loading: false
+    }
+  }
 
+  click() {
+    this.isLoading = true;
+    this.button = 'Processing';
+
+    setTimeout(() => {
+      this.isLoading = false;
+      this.button = 'Ready!';
+    }, 1000)
+
+    setTimeout(() => {
+      this.button = 'SEND';
+    }, 6000)
+    
+  }
   // blades=[(this.filter("blades"))];
   todo = [this.filteredPieces];
 
@@ -40,6 +59,7 @@ export class DragAndDropComponent implements OnInit {
       dataPieces => {
         this.pieces = dataPieces;
         this.filteredPieces = dataPieces;
+        //alert(this.filteredPieces)
       }
     )
   }
@@ -70,30 +90,19 @@ export class DragAndDropComponent implements OnInit {
     } else {
       transferArrayItem(
         this.filteredPieces,
-        event.container.data, //ver que es, o armar un objeto para guardar (id,foto)
+        event.container.data, 
         event.previousIndex,
         event.currentIndex,
       );
-      console.log(this.filteredPieces);
-
     }
   }
   
 
   public addToValidate(name:string, description:string) {
-    
     let newWindmill: Windmill = {base: this.base[0], blades: this.blades[0], body:this.body[0], status:"pending", description:""}; 
     let newWindmillData: WindmillData = {by: name, windmill: newWindmill, desData: description};
-    
-    // console.log(newWindmillData.by);
-    // console.log(newWindmillData.windmill.base);
-    // console.log(newWindmillData.windmill.blades);
-    // console.log(newWindmillData.windmill.body);
-    // console.log(newWindmillData.windmill.description);
-
-    this.windmillToValidateService.addNewElement(newWindmillData).subscribe();
-  
-    
+    this.windmillToValidateService.addNewWindmillToValidate(newWindmillData).subscribe();
+    this.click();  
   }
 
 

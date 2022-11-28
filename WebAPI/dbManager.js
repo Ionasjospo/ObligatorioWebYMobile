@@ -1,4 +1,4 @@
-const { MongoClient } = require("mongodb");
+const { MongoClient, ObjectId } = require("mongodb");
 const mongo = require('mongoose');
 require('dotenv').config();
 const connectionString = process.env.MONGO_STRING;
@@ -66,6 +66,16 @@ class mongoManager {
         }
         const db = await this.client.db(this.dbString); 
         const col = await db.collection(this.collection).insertOne(element);
+        return col
+    }
+    async deleteElement(element){
+        if (this.dbString == undefined) {
+            this.dbString = process.env.MONGO_DB;
+            await this.client.db(this.dbString); 
+        }
+        const db = await this.client.db(this.dbString); 
+        
+        var col = await db.collection(this.collection).deleteOne(element)
         return col
     }
 }
