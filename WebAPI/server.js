@@ -95,6 +95,13 @@ app.post('/validatedWindmills', async(req, res)  =>{
 })
 
 
+app.post('/newPiece', async(req, res)  =>{
+  const mongoManager = new mdbM.mongoManager("pieces");
+  const db = await mongoManager.connect();
+  await mongoManager.insertElement(req.body);
+  res.json("ok");
+})
+
 app.get('/getWindmillToValidate', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("windmillToValidate");
   const db = await mongoManager.connect();
@@ -132,21 +139,37 @@ app.post("/addWindmill", async (req, res) => {
 app.post("/alreadyValidated", async (req, res) => {
   const mongoManager = new mdbM.mongoManager("windmillToValidate");
   const db = await mongoManager.connect();
-  await mongoManager.deleteElement(req.body);
+  var objectId = new ObjectID(req.body._id);
+  let piece = await mongoManager.deleteElement({"_id": objectId});
+  
  
   res.redirect("/validation-table")
 });
 app.post("/ValidateWindmill", async (req, res) => {
-  const mongoManager = new mdbM.mongoManager("validWindmills");
-  const db = await mongoManager.connect();
+  let mongoManager = new mdbM.mongoManager("validWindmills");
+  let db = await mongoManager.connect();
   await mongoManager.insertElement(req.body);
+
+  mongoManager = new mdbM.mongoManager("windmillToValidate");
+  db = await mongoManager.connect();
+  var objectId = new ObjectID(req.body._id);
+  
+  let piece = await mongoManager.deleteElement({"_id": objectId});
+  
   res.json("ok");
 });
 
 app.post("/rejectWindmill", async (req, res) => {
-  const mongoManager = new mdbM.mongoManager("invalidWindmills");
-  const db = await mongoManager.connect();
+  let mongoManager = new mdbM.mongoManager("invalidWindmills");
+  let db = await mongoManager.connect();
   await mongoManager.insertElement(req.body);
+  
+  mongoManager = new mdbM.mongoManager("windmillToValidate");
+  db = await mongoManager.connect();
+  var objectId = new ObjectID(req.body._id);
+  
+  let piece = await mongoManager.deleteElement({"_id": objectId});
+  
   res.json("ok");
 });
 
@@ -221,33 +244,6 @@ app.post("/login", async (req, res) => {
 app.post("/upload", function (req, res) {
   res.send("OK")
 })
-// app.post('/pieces', (req, res) => {
-//   let card = {
-//     id: uuidv4().toString(),
-//     text: req.body.text
-//   }
-//   cards.push(card)
-//   res.send(card);
-// });
-
-// app.put('/card/:id', (req, res) => {
-//   let card = {
-//     id: req.params['id'],
-//     text: req.body.text
-//   }
-//   _.remove(cards, (elem) => {  //es como un for, le paso la lista, y lo que hacer por cada elemento
-//     return elem.id == req.params['id']
-//   });
-//   cards.push(card);
-//   res.send(card);
-// });
-
-// app.delete('/card/:id', (req, res) => {
-//   _.remove(cards, (elem) => {
-//     return elem.id == req.params['id']
-//   });
-//   res.send(cards);
-// });
 
 // APP LISTENER
 app.listen(PORT, () => log.green("SERVER STATUS", `Listening on port ${PORT}`))

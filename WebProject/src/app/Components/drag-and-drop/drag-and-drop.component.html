@@ -23,7 +23,7 @@
       [cdkDropListConnectedTo]="[bladesList, bodyList, baseList]"
       class="example-list"
       (cdkDropListDropped)="drop($event)">
-      <div class="example-box" *ngFor="let i of filteredPieces" cdkDrag id={{i.id}}>
+      <div class="example-box" *ngFor="let i of filteredPieces" cdkDrag>
         <app-item-style [piece]="i" ></app-item-style>
         </div>
     </div>
@@ -75,7 +75,7 @@
   <div class="input-group">
     <input type="text" #nameInput  class="inputValidate" placeholder="Name" aria-label="Name">   
     <input type="text" #descriptionInput  class="inputValidate" placeholder="Description" aria-label="Description">
-    <button type="submit" class="btn btn-primary btn-lg" [disabled]="isLoading" (click)="addToValidate(nameInput.value, descriptionInput.value)"><i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-check': !isLoading}"></i>{{button}}</button>
+    <button type="submit" class="btn btn-primary btn-lg desingBtn" [disabled]="isLoading" (click)="addToValidate(nameInput.value, descriptionInput.value)"><i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-check': !isLoading}"></i>{{button}}</button>
   </div>
 
 
