@@ -1,49 +1,47 @@
 
-
-<!--        Not Logged      -->
-    <section class="vh-100 login">
-        <div class="container-fluid h-custom">
-          <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-md-9 col-lg-6 col-xl-5">
-              <img src="..\assets\logo2.svg"
-                class="img-fluid" alt="Sample image">
+  <section class="vh-100 login ">
+    <div class="container-fluid h-custom">
+      
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        
+          
+        
+        <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1 section">
+          <form #loginForm="ngForm" method="POST" action="/login">
+            <img src="..\assets\logo2.svg"
+            class="img-fluid logo" alt="Sample image">
+            <!-- User input -->
+            <div class="form-outline mb-4">
+              <input type="email" required #userInput class="form-control form-control-lg" placeholder="Username" />
+              <label class="form-label" for="form3Example3">Username</label>
             </div>
-            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-              <form #loginForm="ngForm" method="POST" action="/login" >
 
-                <!-- User input -->
-                <div class="form-outline mb-4">
-                  <input type="email" required #userInput class="form-control form-control-lg"
-                    placeholder="Username" />
-                  <!-- <label class="form-label" for="form3Example3">Username</label> -->
-                </div>
-      
-                <!-- Password input -->
-                <div class="form-outline mb-3">
-                  <input type="password" required #passwordInput class="form-control form-control-lg"
-                    placeholder="Enter password" autocomplete="off" />
-                  <!-- <label class="form-label" for="form3Example4">Password</label> -->
-                </div>
-      
-                
-      
-                <div class="text-center text-lg-start mt-4 pt-2">
-                  <div *ngIf="invalidLogin"> <h6 class="danger"> User or password incorrect. Try again. </h6></div>
-                  
-                  
-                  <button type="submit" (click)="login(userInput.value, passwordInput.value)" class="btn btn-primary btn-lg loginButton"
-                    >Login</button>
-                  
-                </div>
-                <div *ngIf="loading" class="spinner-border" role="status">
+            <!-- Password input -->
+            <div class="form-outline mb-3">
+              <input type="password" required #passwordInput class="form-control form-control-lg"
+                placeholder="Enter password" autocomplete="off" />
+              <label class="form-label" for="form3Example4">Password</label>
+            </div>
+
+
+
+            <div class="text-center text-lg-start mt-4 pt-2">
+              <div *ngIf="invalidLogin">
+                <h6 class="danger"> User or password incorrect. Try again. </h6>
+              </div>
+
+              
+              
+              <button type="submit" (click)="login(userInput.value, passwordInput.value)"
+                class="btn btn-primary btn-lg loginButton">Login</button><div *ngIf="loading" class="spinner-border spinner-login" role="status">
                   <span class="visually-hidden">Loading...</span>
                 </div>
-      
-              </form>
-            </div>
-          </div>
-        </div>
-    </section>
+                
 
-  
-<!--        Logged      -->
+            </div>
+            
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>

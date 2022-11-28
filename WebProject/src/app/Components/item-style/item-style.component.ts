@@ -12,12 +12,15 @@ import { PieceListService } from 'src/app/Services/piece-list.service';
 })
 export class ItemStyleComponent implements OnInit {
   @Input() piece?: Piece;
-  constructor(private CatalogueComponent: CatalogueComponent, private pieceListService: PieceListService) { }
 
-  ngOnInit(): void {
+  @Input() delBtn?: boolean;
+  constructor(private pieceListService: PieceListService) { }
+
   
+ 
+  
+  ngOnInit(): void {
   }
-
   faTrash = faTrash;
 
   public delete(piece: Piece){

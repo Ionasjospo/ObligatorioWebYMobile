@@ -8,9 +8,11 @@
               Type: {{piece.type}}.<br>
               Height: {{piece.height}}.<br>
               Resistance: {{piece.resistance}}.<br>
-              Material: {{piece.material}}.
-              <button class="btn btn-danger faiconstyle" (click)="delete(piece)"><fa-icon [icon]="faTrash"></fa-icon></button><br>
+              Material: {{piece.material}}.<br>
           </p>
+          <div *ngIf="delBtn">
+            <button class="btn btn-danger faiconstyle delButton" (click)="delete(piece)"><fa-icon [icon]="faTrash"></fa-icon></button>
+          </div>  
         </div>
       </div>
 </div>

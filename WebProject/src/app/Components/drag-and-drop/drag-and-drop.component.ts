@@ -22,13 +22,32 @@ export class DragAndDropComponent implements OnInit {
     this.start();
   }
 
+  pieces: Piece[] = [];
+  filteredPieces: Piece[] = [];
 
+  button = 'SEND';
+  isLoading = false;
+  buttons = {
+    button1: {
+      name: 'Send',
+      loading: false
+    }
+  }
 
+  click() {
+    this.isLoading = true;
+    this.button = 'Processing';
 
-  allPieces: Piece[] = [];
-  showPieces: Piece[] = [];
+    setTimeout(() => {
+      this.isLoading = false;
+      this.button = 'Ready!';
+    }, 1000)
 
-
+    setTimeout(() => {
+      this.button = 'SEND';
+    }, 6000)
+    
+  }
   // blades=[(this.filter("blades"))];
   todo = [this.showPieces];
 
@@ -38,8 +57,10 @@ export class DragAndDropComponent implements OnInit {
   public start() {
     this.pieceListService.getPieces().subscribe(
       dataPieces => {
-        this.allPieces = dataPieces;
-        this.showPieces = dataPieces;
+
+        this.pieces = dataPieces;
+        this.filteredPieces = dataPieces;
+        //alert(this.filteredPieces)
       }
     )
   }
@@ -69,31 +90,21 @@ export class DragAndDropComponent implements OnInit {
       moveItemInArray(this.showPieces, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
-        this.showPieces,
-        event.container.data, //ver que es, o armar un objeto para guardar (id,foto)
+        this.filteredPieces,
+        event.container.data, 
         event.previousIndex,
         event.currentIndex,
       );
-      console.log(this.showPieces);
 
     }
   }
   
 
   public addToValidate(name:string, description:string) {
-    
     let newWindmill: Windmill = {base: this.base[0], blades: this.blades[0], body:this.body[0], status:"pending", description:""}; 
     let newWindmillData: WindmillData = {by: name, windmill: newWindmill, desData: description};
-    
-    // console.log(newWindmillData.by);
-    // console.log(newWindmillData.windmill.base);
-    // console.log(newWindmillData.windmill.blades);
-    // console.log(newWindmillData.windmill.body);
-    // console.log(newWindmillData.windmill.description);
-
-    this.windmillToValidateService.addNewElement(newWindmillData).subscribe();
-  
-    
+    this.windmillToValidateService.addNewWindmillToValidate(newWindmillData).subscribe();
+    this.click();  
   }
 
 
