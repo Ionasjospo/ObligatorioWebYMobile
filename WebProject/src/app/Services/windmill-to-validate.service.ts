@@ -27,15 +27,12 @@ export class WindmillToValidateService {
   } 
   
   validateWindmill(wdm : WindmillData){   
-    return this.http.post<WindmillData>('http://localhost:8090/ValidateWindmill', wdm).subscribe()
+    return this.http.post<WindmillData>('http://localhost:8090/ValidateWindmill', wdm)
   } 
   rejectWindmill(wdm : WindmillData){
-    return this.http.post<WindmillData>('http://localhost:8090/rejectWindmill', wdm).subscribe()
+    return this.http.post<WindmillData>('http://localhost:8090/rejectWindmill', wdm)
   }
 
-  alreadyValidated(wdm:WindmillData){
-    return this.http.post<WindmillData>('http://localhost:8090/alreadyValidated', wdm).subscribe()
-  }
 
   
 

@@ -5,7 +5,7 @@ const cors = require('cors');
 const _ = require('lodash');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
-const { indexOf, findIndex } = require('lodash');
+const { indexOf, findIndex, extend } = require('lodash');
 const { count } = require('console');
 const mdbM = require('./dbManager.js');
 require("dotenv").config()
@@ -31,9 +31,11 @@ var corsOptions = { //cross domain
   optionsSuccessStatus: 200,
   methods: "GET, POST, PUT, DELETE"
 }
-app.use(express.json())
+
 app.use(morgan("tiny"))
 app.use(cors(corsOptions));
+app.use(express.json({limit: '25mb'}));
+app.use(express.urlencoded({limit: '25mb'}));
 
 
 app.use(function (req, res, next) {
@@ -83,8 +85,6 @@ app.post('/deletePieces', async (req, res) => {
   console.log(req.body);
   var objectId = new ObjectID(req.body._id);
   let piece = await mongoManager.deletePiece({"_id": objectId});
-  console.log("acá estas en la api: ");
-
 });
 
 app.post('/validatedWindmills', async(req, res)  =>{
@@ -94,6 +94,14 @@ app.post('/validatedWindmills', async(req, res)  =>{
   res.json("ok");
 })
 
+
+app.post('/newPiece', async(req, res)  =>{
+  const mongoManager = new mdbM.mongoManager("pieces");
+  const db = await mongoManager.connect();
+  await mongoManager.insertElement(req.body);
+  console.log("quedo");
+  res.json("ok");
+})
 
 app.get('/getWindmillToValidate', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("windmillToValidate");
@@ -132,21 +140,37 @@ app.post("/addWindmill", async (req, res) => {
 app.post("/alreadyValidated", async (req, res) => {
   const mongoManager = new mdbM.mongoManager("windmillToValidate");
   const db = await mongoManager.connect();
-  await mongoManager.deleteElement(req.body);
+  var objectId = new ObjectID(req.body._id);
+  let piece = await mongoManager.deleteElement({"_id": objectId});
+  
  
   res.redirect("/validation-table")
 });
 app.post("/ValidateWindmill", async (req, res) => {
-  const mongoManager = new mdbM.mongoManager("validWindmills");
-  const db = await mongoManager.connect();
+  let mongoManager = new mdbM.mongoManager("validWindmills");
+  let db = await mongoManager.connect();
   await mongoManager.insertElement(req.body);
+
+  mongoManager = new mdbM.mongoManager("windmillToValidate");
+  db = await mongoManager.connect();
+  var objectId = new ObjectID(req.body._id);
+  
+  let piece = await mongoManager.deleteElement({"_id": objectId});
+  
   res.json("ok");
 });
 
 app.post("/rejectWindmill", async (req, res) => {
-  const mongoManager = new mdbM.mongoManager("invalidWindmills");
-  const db = await mongoManager.connect();
+  let mongoManager = new mdbM.mongoManager("invalidWindmills");
+  let db = await mongoManager.connect();
   await mongoManager.insertElement(req.body);
+  
+  mongoManager = new mdbM.mongoManager("windmillToValidate");
+  db = await mongoManager.connect();
+  var objectId = new ObjectID(req.body._id);
+  
+  let piece = await mongoManager.deleteElement({"_id": objectId});
+  
   res.json("ok");
 });
 
@@ -221,33 +245,6 @@ app.post("/login", async (req, res) => {
 app.post("/upload", function (req, res) {
   res.send("OK")
 })
-// app.post('/pieces', (req, res) => {
-//   let card = {
-//     id: uuidv4().toString(),
-//     text: req.body.text
-//   }
-//   cards.push(card)
-//   res.send(card);
-// });
-
-// app.put('/card/:id', (req, res) => {
-//   let card = {
-//     id: req.params['id'],
-//     text: req.body.text
-//   }
-//   _.remove(cards, (elem) => {  //es como un for, le paso la lista, y lo que hacer por cada elemento
-//     return elem.id == req.params['id']
-//   });
-//   cards.push(card);
-//   res.send(card);
-// });
-
-// app.delete('/card/:id', (req, res) => {
-//   _.remove(cards, (elem) => {
-//     return elem.id == req.params['id']
-//   });
-//   res.send(cards);
-// });
 
 // APP LISTENER
 app.listen(PORT, () => log.green("SERVER STATUS", `Listening on port ${PORT}`))

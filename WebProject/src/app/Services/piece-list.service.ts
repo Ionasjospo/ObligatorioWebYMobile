@@ -15,6 +15,9 @@ export class PieceListService {
   getPieces(): Observable<Piece[]> {
     return this.http.get<Piece[]>('http://localhost:8090/pieces');
   }
+  newPiece(piece: Piece){
+    return this.http.post('http://localhost:8090/newPiece', piece);
+  }
 
   deletePiece(piece: Piece){
     return this.http.post('http://localhost:8090/deletePieces', piece);

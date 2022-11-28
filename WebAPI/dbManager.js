@@ -48,7 +48,7 @@ class mongoManager {
         return col
     }
 
-    async deletePiece(element){
+    async deleteElement(element){
         if (this.dbString == undefined) {
             this.dbString = process.env.MONGO_DB;
             await this.client.db(this.dbString); 
