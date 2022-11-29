@@ -27,7 +27,7 @@ const HOST = '0.0.0.0';
 // App
 const app = express();
 var corsOptions = { //cross domain
-  origin: 'http://localhost:4200',
+  origin: ['http://localhost:4200', 'http://localhost:8100', 'http://localhost:8101'],
   optionsSuccessStatus: 200,
   methods: "GET, POST, PUT, DELETE"
 }
