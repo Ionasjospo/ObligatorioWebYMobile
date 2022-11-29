@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   invalidLogin: boolean = false;
   validLogin: boolean = false;
   loading: boolean = false;
+  role: string = '';
   
 
  
@@ -34,10 +35,13 @@ export class LoginComponent implements OnInit {
     this.userListService.login({username: username, password : password, role: ''}).subscribe((res:any) => {
       
       this.validLogin = res.user !== undefined;
+      this.role = res.user.role;
+      
       if(this.validLogin) {
         this.route.navigate(["/home"]);
         this.loginService.logIn();
         localStorage.setItem('jwt', res.jwtToken);
+        localStorage.setItem('role', res.user.role)
       }
       else{
         this.loginService.logOut();

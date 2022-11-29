@@ -2,11 +2,7 @@
 
 const express = require('express');
 const cors = require('cors');
-const _ = require('lodash');
-const { v4: uuidv4 } = require('uuid');
 const path = require('path');
-const { indexOf, findIndex, extend } = require('lodash');
-const { count } = require('console');
 const mdbM = require('./dbManager.js');
 require("dotenv").config()
 const morgan = require("morgan")
@@ -37,6 +33,12 @@ app.use(cors(corsOptions));
 app.use(express.json({limit: '25mb'}));
 app.use(express.urlencoded({limit: '25mb'}));
 
+app.get('/', (req, res) => {
+  res.send('Welcome to our Windmill API ');
+});
+
+
+//Login 
 
 app.use(function (req, res, next) {
   if (req.url.toString().includes('login')) {
@@ -62,13 +64,69 @@ app.use(function (req, res, next) {
 
 });
 
+app.post("/login", async (req, res) => {
+  let username = req.body.username;
+  let password = req.body.password;
+  const mongoManager = new mdbM.mongoManager("users");
+  const db = await mongoManager.connect();
+  let user = await mongoManager.findCollectionAndElement("username", username);
+  if (undefined || user.length != 0) {
 
+    const result = await bcrypt.compare(req.body.password, user[0].password);
 
-app.get('/', (req, res) => {
-  res.send('Welcome to our Windmill API ');
+    if (result) {
+      const token = await jwt.sign({ username: user.username , role:user[0].role }, SECRET, {expiresIn: '12h'});
+      
+      res.send(
+        {
+          user: user[0], 
+          role: user.role,
+          jwtToken: token
+        }
+
+      );
+
+    } else {
+      res.status(200).json({ error: "User or password lkj incorrect. Try again." });
+    }
+  }
+  else {
+    res.status(200).json({ error: "User or password lkjh incorrect. Try again." });
+  }
 });
 
 
+//Register User
+
+app.post("/register", async (req, res) => {
+  // hash the password
+  let username = req.body.username;
+  req.body.password = await bcrypt.hash(req.body.password, 10);
+  // create a new user
+  const mongoManager = new mdbM.mongoManager("users");
+  const db = await mongoManager.connect();
+  let user = await mongoManager.findCollectionAndElement("username", username);
+
+  if (user.length != 0) {
+    res.json("Username already exists!");
+  } else {
+    await mongoManager.insertElement(req.body);
+    res.json("Registered!");
+  }
+
+});
+
+app.get('/users', async (req, res) => {
+  const mongoManager = new mdbM.mongoManager("users");
+  const db = await mongoManager.connect();
+
+  let users = await mongoManager.getOneCollection();
+
+  res.send(users);
+});
+
+
+//Get all Pieces
 app.get('/pieces', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("pieces");
   const db = await mongoManager.connect();
@@ -78,22 +136,7 @@ app.get('/pieces', async (req, res) => {
   res.send(pieces);
 });
 
-app.post('/deletePieces', async (req, res) => {
-  const mongoManager = new mdbM.mongoManager("pieces");
-  const db = await mongoManager.connect();
-  
-  console.log(req.body);
-  var objectId = new ObjectID(req.body._id);
-  let piece = await mongoManager.deletePiece({"_id": objectId});
-});
-
-app.post('/validatedWindmills', async(req, res)  =>{
-  const mongoManager = new mdbM.mongoManager("validatedWindmills");
-  const db = await mongoManager.connect();
-  await mongoManager.insertElement(req.body);
-  res.json("ok");
-})
-
+//Add new piece to catalogue
 
 app.post('/newPiece', async(req, res)  =>{
   const mongoManager = new mdbM.mongoManager("pieces");
@@ -103,6 +146,33 @@ app.post('/newPiece', async(req, res)  =>{
   res.json("ok");
 })
 
+
+//Delete a piece from catalogue
+
+app.post('/deletePieces', async (req, res) => {
+  const mongoManager = new mdbM.mongoManager("pieces");
+  const db = await mongoManager.connect();
+  
+  var objectId = new ObjectID(req.body._id);
+  let piece = await mongoManager.deletePiece({"_id": objectId});
+
+  res.json("ok");
+});
+
+
+//Table of validated designs
+
+// app.post('/validatedWindmills', async(req, res)  =>{
+//   const mongoManager = new mdbM.mongoManager("validatedWindmills");
+//   const db = await mongoManager.connect();
+//   await mongoManager.insertElement(req.body);
+//   res.json("ok");
+// })
+
+
+
+//Table of designs to validate
+
 app.get('/getWindmillToValidate', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("windmillToValidate");
   const db = await mongoManager.connect();
@@ -111,6 +181,7 @@ app.get('/getWindmillToValidate', async (req, res) => {
   res.send(windmills);
 });
 
+//Table of valid designs
 
 app.get('/getValidWindmills', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("validWindmills");
@@ -119,6 +190,9 @@ app.get('/getValidWindmills', async (req, res) => {
 
   res.send(windmills);
 });
+
+
+//Table of invalid designs
 
 app.get('/getInvalidWindmills', async (req, res) => {
   const mongoManager = new mdbM.mongoManager("invalidWindmills");
@@ -129,6 +203,8 @@ app.get('/getInvalidWindmills', async (req, res) => {
   res.send(windmills);
 });
 
+//Add a new design
+
 app.post("/addWindmill", async (req, res) => {
     const mongoManager = new mdbM.mongoManager("windmillToValidate");
     const db = await mongoManager.connect();
@@ -136,6 +212,7 @@ app.post("/addWindmill", async (req, res) => {
     res.json("ok");
 });
 
+//To remove from the ToValid table
 
 app.post("/alreadyValidated", async (req, res) => {
   const mongoManager = new mdbM.mongoManager("windmillToValidate");
@@ -146,6 +223,9 @@ app.post("/alreadyValidated", async (req, res) => {
  
   res.redirect("/validation-table")
 });
+
+//Valid a design
+
 app.post("/ValidateWindmill", async (req, res) => {
   let mongoManager = new mdbM.mongoManager("validWindmills");
   let db = await mongoManager.connect();
@@ -159,6 +239,10 @@ app.post("/ValidateWindmill", async (req, res) => {
   
   res.json("ok");
 });
+
+
+//Reject/invalid a design
+
 
 app.post("/rejectWindmill", async (req, res) => {
   let mongoManager = new mdbM.mongoManager("invalidWindmills");
@@ -174,77 +258,8 @@ app.post("/rejectWindmill", async (req, res) => {
   res.json("ok");
 });
 
-app.post("/register", async (req, res) => {
-  //try {
-  // hash the password
-  let username = req.body.username;
-  req.body.password = await bcrypt.hash(req.body.password, 10);
-  // create a new user
-  const mongoManager = new mdbM.mongoManager("users");
-  const db = await mongoManager.connect();
-  let user = await mongoManager.findCollectionAndElement("username", username);
-
-  if (user.length != 0) {
-    console.log("Username already exists!");
-  } else {
-    await mongoManager.insertElement(req.body);
-    // send new user as response
-    res.json("ok");
-    console.log(req.body);
-    console.log("Registered!");
-
-  }
-
-});
-
-app.get('/users', async (req, res) => {
-  const mongoManager = new mdbM.mongoManager("users");
-  const db = await mongoManager.connect();
-
-  let users = await mongoManager.getOneCollection();
-
-  res.send(users);
-});
 
 
-app.post("/login", async (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  const mongoManager = new mdbM.mongoManager("users");
-  const db = await mongoManager.connect();
-  let user = await mongoManager.findCollectionAndElement("username", username);
-  if (undefined || user.length != 0) {
-
-    const result = await bcrypt.compare(req.body.password, user[0].password);
-
-    if (result) {
-      const token = await jwt.sign({ username: user.username /*, role:user[0].role */ }, SECRET, {expiresIn: '12h'});
-      
-      //console.log(token);
-      // res.json({ token });
-      res.send(
-        {
-          user: user[0], //cambiar user solo por rol asi no va la pass encriptada
-          jwtToken: token
-        }
-
-      );
-
-    } else {
-      res.status(200).json({ error: "User or password lkj incorrect. Try again." });
-    }
-  }
-  else {
-    res.status(200).json({ error: "User or password lkjh incorrect. Try again." });
-  }
-
-
-
-});
-
-app.post("/upload", function (req, res) {
-  res.send("OK")
-})
 
 // APP LISTENER
 app.listen(PORT, () => log.green("SERVER STATUS", `Listening on port ${PORT}`))
