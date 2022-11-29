@@ -38,7 +38,6 @@ export class UserRegisterComponent implements OnInit {
       dataUser => { 
       this.users = dataUser;
     })
-    console.log(this.users);
     
   }
 

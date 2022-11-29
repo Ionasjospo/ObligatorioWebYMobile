@@ -15,6 +15,7 @@ export class InterceptorsService implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     try {
        const token = localStorage.getItem('jwt');
+       const role = localStorage.getItem('role');
       
       if (!token) {
           
