@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Tab1Page } from './tab1.page';
-import { PieceListService } from './piece-list.service';
+import { PieceListService } from '../piece-list.service';
 
 const routes: Routes = [
   {

@@ -107,6 +107,7 @@ export class CatalogueComponent implements OnInit {
     } else {
       return `with: ${reason}`;
     }
+  }
 
   public deletePiece(piece: Piece){
     this.pieceDeletedEvent.emit(piece);

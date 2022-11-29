@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { PieceListService } from './piece-list.service';
-import { Piece } from './Piece'; 
+import { Component, OnInit} from '@angular/core';
+import { PieceListService } from '../piece-list.service';
+import { Piece } from '../Piece';
 
 
 @Component({
@@ -8,11 +8,13 @@ import { Piece } from './Piece';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
-export class Tab1Page {
+export class Tab1Page implements OnInit {
   
   constructor(private PieceListService: PieceListService) {}
 
-
+  ngOnInit(): void {
+    this.start();
+  }
   allPieces: Piece[] = [];
   showPieces: Piece[] = [];
 
@@ -25,9 +27,23 @@ export class Tab1Page {
       this.allPieces = dataPieces;
       this.showPieces = dataPieces;
     })    
+    console.log(this.showPieces);
+    console.log(this.allPieces);
   }
 
+  
 
+  public filter(filter: string) {
+    this.showPieces = [];
+    this.allPieces.forEach(element => {
+      if (element.type.toLowerCase() === filter) {
+        this.showPieces.push(element);
+      }
+      if (filter == 'all') {
+        this.showPieces = this.allPieces;
+      }
+    });
+  }
 
 
 }
