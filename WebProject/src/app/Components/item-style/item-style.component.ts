@@ -35,13 +35,4 @@ export class ItemStyleComponent implements OnInit {
 
   }
 
-  // public getImage(){
-  //   if (this.piece) {
-  //     let img = this.piece.img;
-  //     img= this._sanitizer.bypassSecurityTrustResourceUrl(this.piece.img + toReturnImage.base64string)
-  //     return img
-  //   }
-  //   return null
-  // }
-
 }

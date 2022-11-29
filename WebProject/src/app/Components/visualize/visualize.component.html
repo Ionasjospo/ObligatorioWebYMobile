@@ -1,6 +1,6 @@
 <div class="ls">
 
-    <h1>The windmill designed by {{data.by}} was: </h1>
+    <h1 class="title">The windmill designed by {{data.by}} was: </h1><br>
 
 
     <div class="col-12 col-md-10">
@@ -9,11 +9,10 @@
             <div *ngFor="let i of piecesList" class="col-12 col-sm-6 col-lg-4 mb-2">
                 <app-item-style [piece]="i"></app-item-style>
             </div>
-
+        </div>
+        <div class="divBTN">
+            <button class="btn btn-primary btn-lg backBtn" routerLink="/validation-table">Back</button>
         </div>
     </div>
-
-    <button class="btn btn-primary btn-lg" routerLink="/validation-table">Back</button>
-
-
+    
 </div>

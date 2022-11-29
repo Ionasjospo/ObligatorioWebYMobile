@@ -80,7 +80,6 @@ export class DragAndDropComponent implements OnInit {
       }
     });
   }
-  //{id: 2, title: "hola", type: "nashe", img: "../../assets/blades.jpg", material: "mdsf", height: "goak,", resistance: "hihgh"}
   base: Piece[] = [];
   blades: Piece[] = [];
   body: Piece[] = [];
@@ -104,7 +103,10 @@ export class DragAndDropComponent implements OnInit {
     let newWindmill: Windmill = {base: this.base[0], blades: this.blades[0], body:this.body[0], status:"pending", description:""}; 
     let newWindmillData: WindmillData = {by: name, windmill: newWindmill, desData: description};
     this.windmillToValidateService.addNewWindmillToValidate(newWindmillData).subscribe();
-    this.click();  
+    this.click();
+    this.base = []
+    this.body = [] 
+    this.blades = [] 
   }
 
 

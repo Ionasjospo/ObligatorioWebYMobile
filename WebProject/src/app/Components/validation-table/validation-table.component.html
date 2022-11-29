@@ -1,5 +1,5 @@
-<div class="table-responsive-lg">
-  <h3 class="display-4">To validate Desings</h3>
+<div class="table-responsive-lg toValList">
+  <h3 class="display-4 title">To validate Desings</h3>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -7,18 +7,17 @@
         <th scope="col">By</th>
         <th scope="col">Description</th>
         <th scope="col">Validate</th>
+        <th scope="col">Visualize</th>
       </tr>
     </thead>
     <tbody *ngFor="let w of toValidate">
+
       <tr>
-        <th scope="row">{{toValidate.indexOf(w)}}</th>
+        <th scope="row">{{toValidate.indexOf(w)+1}}</th>
         <td>{{w.by}}</td>
         <td>{{w.desData}}</td>
         <td>
-          <button class="btn btn-dark faiconstyle" (click)="goToVisualize(w)"> 
-            <fa-icon [icon]="faEye"></fa-icon>
-<!-- agregar para que cuando pasemos por arriba al botton diga que hace -->
-          </button>
+          
           <button class="btn btn-success faiconstyle" (click)="validateWindmill(w)">
             <fa-icon [icon]="faCircleCheck"></fa-icon>
           </button>
@@ -26,7 +25,13 @@
             <fa-icon [icon]="faTrash"></fa-icon>
           </button>
         </td>
-      </tr>
+        <td>
+          <button class="btn btn-dark faiconstyle" (click)="goToVisualize(w)">
+            <fa-icon [icon]="faEye"></fa-icon>
+            <!-- agregar para que cuando pasemos por arriba al botton diga que hace -->
+          </button>
+        </td>
+      </tr>      
     </tbody>
   </table>
 </div>
@@ -34,7 +39,7 @@
 
 
 <div class="table-responsive-lg doneList">
-  <h3 class="display-4">Valid Desings</h3>
+  <h3 class="display-4 title">Valid Desings</h3>
   <table class="table table-striped table-hover">
     <thead>
       <tr>
@@ -42,43 +47,51 @@
         <th scope="col">By</th>
         <th scope="col">Description</th>
         <th scope="col">Validate</th>
+        <th scope="col">Visualize</th>
       </tr>
     </thead>
 
     <tbody *ngFor="let w of valids">
-      <th scope="row">{{valids.indexOf(w)}}</th>
-      <td>{{w.by}}</td>
-      <td>{{w.desData}}</td>
-      <td>{{w.windmill.status}}</td>
-      <td><button class="btn btn-dark faiconstyle" (click)="goToVisualize(w)"> 
-        <fa-icon [icon]="faEye"></fa-icon>
-<!-- agregar para que cuando pasemos por arriba al botton diga que hace -->
-      </button></td>
+      <tr>
+        <th scope="row">{{valids.indexOf(w)+1}}</th>
+        <td>{{w.by}}</td>
+        <td>{{w.desData}}</td>
+        <td>{{w.windmill.status}}</td>
+        <td><button class="btn btn-dark faiconstyle" (click)="goToVisualize(w)">
+            <fa-icon [icon]="faEye"></fa-icon>
+            <!-- agregar para que cuando pasemos por arriba al botton diga que hace -->
+          </button></td>
+        </tr>
     </tbody>
   </table>
 </div>
 
 <div class="table-responsive-lg invalidList">
-  <h3 class="display-4">Invalid Desings</h3>
-  <table class="table table-striped table-hover">
+  <h3 class="display-4 title">Invalid Desings</h3>
+
+  <table class="table table-striped">
     <thead>
       <tr>
         <th scope="col">#id</th>
         <th scope="col">By</th>
         <th scope="col">Description</th>
         <th scope="col">Validate</th>
+        <th scope="col">Visualize</th>
       </tr>
     </thead>
-
     <tbody *ngFor="let w of invalids">
-      <th scope="row">{{invalids.indexOf(w)}}</th>
-      <td>{{w.by}}</td>
-      <td>{{w.desData}}</td>
-      <td>{{w.windmill.status}}</td>
-      <td><button class="btn btn-dark faiconstyle" (click)="goToVisualize(w)"> 
-        <fa-icon [icon]="faEye"></fa-icon>
-<!-- agregar para que cuando pasemos por arriba al botton diga que hace -->
-      </button></td>
+      <tr>
+        <th scope="row">{{invalids.indexOf(w) +1}}</th>
+        <td>{{w.by}}</td>
+        <td>{{w.desData}}</td>
+        <td>{{w.windmill.status}}</td>
+
+        <td>
+          <button class="btn btn-dark faiconstyle" (click)="goToVisualize(w)">
+            <fa-icon [icon]="faEye"></fa-icon>
+          </button>
+        </td>
+      </tr>
     </tbody>
   </table>
 </div>

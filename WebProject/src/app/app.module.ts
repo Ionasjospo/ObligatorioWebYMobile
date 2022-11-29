@@ -17,7 +17,6 @@ import { HttpClientModule } from "@angular/common/http";
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import { DragAndDropComponent } from './Components/drag-and-drop/drag-and-drop.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { OnclickPieceComponent } from './Components/onclick-piece/onclick-piece.component';
 import { UserRegisterComponent } from './Components/user-register/user-register.component';
 import { InterceptorsService } from './Services/interceptors.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -38,7 +37,6 @@ import { VisualizeComponent } from './Components/visualize/visualize.component';
     ItemStyleComponent,
     ValidationTableComponent,
     DragAndDropComponent,
-    OnclickPieceComponent,
     UserRegisterComponent,
     VisualizeComponent
 
